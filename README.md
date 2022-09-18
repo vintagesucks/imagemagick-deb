@@ -13,9 +13,9 @@ apt-get install -y wget libbz2-dev libfontconfig1-dev libfreetype-dev libgs-dev 
 wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.1/jammy_libde265_1.0.8-1_amd64.deb
 wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.1/jammy_libheif_1.13.0-1_amd64.deb
 wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.1/jammy_imagemagick_7.1.0-1_amd64.deb
-apt install ./jammy_libde265_1.0.8-1_amd64.deb
-apt install ./jammy_libheif_1.13.0-1_amd64.deb
-apt install ./jammy_imagemagick_7.1.0-1_amd64.deb
+dpkg -i jammy_libde265_1.0.8-1_amd64.deb
+dpkg -i jammy_libheif_1.13.0-1_amd64.deb
+dpkg -i jammy_imagemagick_7.1.0-1_amd64.deb
 ```
 
 #### Example Output (Ubuntu 22.04)
