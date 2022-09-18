@@ -3,7 +3,7 @@
 
 [ImageMagick](https://imagemagick.org/) packaging for Ubuntu built with [CheckInstall](https://asic-linux.com.mx/~izto/checkinstall/).
 
-> **Warning**
+> **Warning**  
 > [Released packages](https://github.com/vintagesucks/imagemagick-deb/releases) are for demonstration purposes only and are not suitable for production use.
 
 #### Example Usage (Ubuntu 22.04)
