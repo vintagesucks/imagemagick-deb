@@ -1,0 +1,159 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "*"
+  schedule:
+    - cron: "0 0 1 * *"
+
+jobs:
+  build:
+    name: "ImageMagick ${{ matrix.imagemagick-version }} (${{ matrix.ubuntu-version }})"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ubuntu-version:
+          - focal
+          - jammy
+        libde265-version: ["1.0.8"]
+        libheif-version: ["1.13.0"]
+        imagemagick-version: ["7.1.0-48"]
+
+    container:
+      image: ubuntu:${{ matrix.ubuntu-version }}
+      options: --user root
+    steps:
+      - name: Create binaries folder
+        run: mkdir binaries
+
+      - name: Install build dependencies
+        run: >
+          export DEBIAN_FRONTEND=noninteractive &&
+          apt-get update &&
+          apt-get -y install
+          autoconf
+          build-essential
+          checkinstall
+          curl
+          git
+          libtool
+          pkg-config
+          software-properties-common
+          wget
+
+      - name: Install ImageMagick format dependencies
+        run: >
+          apt-get -y install
+          libbz2-dev
+          libfontconfig1-dev
+          libfreetype-dev
+          libgs-dev
+          liblcms2-dev
+          liblzma-dev
+          libopenexr-dev
+          libopenjp2-7-dev
+          libjpeg-turbo8-dev
+          libpng-dev
+          liblqr-1-0-dev libglib2.0-dev
+          libraw-dev
+          libtiff-dev
+          libwebp-dev
+          libxml2-dev
+          libx11-dev
+          libx265-dev libaom-dev
+          zlib1g
+
+      - name: Build libde265 ${{ matrix.libde265-version }} from source
+        run: |
+          git clone --depth 1 --branch v${{ matrix.libde265-version }} https://github.com/strukturag/libde265.git
+          cd libde265
+          ./autogen.sh
+          ./configure
+          make
+          checkinstall --pkgversion="${{ matrix.libde265-version }}"
+          mv libde265_*.deb ../binaries/
+
+      - name: Build libheif ${{ matrix.libheif-version }} from source
+        run: |
+          git clone --depth 1 --branch v${{ matrix.libheif-version }} https://github.com/strukturag/libheif.git
+          cd libheif
+          ./autogen.sh
+          ./configure
+          make
+          checkinstall --pkgversion="${{ matrix.libheif-version }}"
+          mv libheif_*.deb ../binaries/
+
+      - name: Check ImageMagick dependencies
+        run: |
+          pkg-config --exists --print-errors "fontconfig >= 2.1.0" && echo "fontconfig succeeded" || echo "fontconfig failed"
+          pkg-config --exists --print-errors "freetype2 >= 2.8.0" && echo "freetype2 succeeded" || echo "freetype2 failed"
+          pkg-config --exists --print-errors "lcms2 >= 2.0.0" && echo "lcms2 succeeded" || echo "lcms2 failed"
+          pkg-config --exists --print-errors "libde265 >= 1.0.8" && echo "libde265 succeeded" || echo "libde265 failed"
+          pkg-config --exists --print-errors "libheif >= 1.13.0" && echo "libheif succeeded" || echo "libheif failed"
+          pkg-config --exists --print-errors "liblzma >= 2.9.0" && echo "liblzma succeeded" || echo "liblzma failed"
+          pkg-config --exists --print-errors "libopenjp2 >= 2.1.0" && echo "libopenjp2 succeeded" || echo "libopenjp2 failed"
+          pkg-config --exists --print-errors "libpng >= 1.0.0" && echo "libpng succeeded" || echo "libpng failed"
+          pkg-config --exists --print-errors "libtiff-4 >= 4.0.0" && echo "libtiff-4 succeeded" || echo "libtiff-4 failed"
+          pkg-config --exists --print-errors "libraw_r >= 0.14.8" && echo "libraw_r succeeded" || echo "libraw_r failed"
+          pkg-config --exists --print-errors "libwebp >= 0.6.1" && echo "libwebp succeeded" || echo "libwebp failed"
+          pkg-config --exists --print-errors "libwebpdemux >= 0.5.0" && echo "libwebpdemux succeeded" || echo "libwebpdemux failed"
+          pkg-config --exists --print-errors "libwebpmux >= 0.5.0" && echo "libwebpmux succeeded" || echo "libwebpmux failed"
+          pkg-config --exists --print-errors "libxml-2.0 >= 2.0.0" && echo "libxml-2.0 succeeded" || echo "libxml-2.0 failed"
+          pkg-config --exists --print-errors "lqr-1 >= 0.1.0" && echo "lqr-1 succeeded" || echo "lqr-1 failed"
+          pkg-config --exists --print-errors "OpenEXR >= 1.0.6" && echo "OpenEXR succeeded" || echo "OpenEXR failed"
+          pkg-config --exists --print-errors "zlib >= 1.0.0" && echo "zlib succeeded" || echo "zlib failed"
+
+      - name: Build ImageMagick ${{ matrix.imagemagick-version }} from source
+        run: >
+          git clone --depth 1 --branch ${{ matrix.imagemagick-version }} https://github.com/ImageMagick/ImageMagick.git imagemagick &&
+          cd imagemagick &&
+          ./configure
+          --disable-dependency-tracking
+          --disable-opencl
+          --disable-silent-rules
+          --disable-shared
+          --enable-openmp
+          --enable-static
+          --with-bzlib=yes
+          --with-fontconfig=yes
+          --with-freetype=yes
+          --with-gslib=yes
+          --with-lqr=yes
+          --with-gvc=no
+          --with-heic=yes
+          --with-modules
+          --with-openexr=yes
+          --with-openjp2
+          --with-raw=yes
+          --with-webp=yes
+          --with-xml=yes
+          --without-fftw
+          --without-pango
+          --without-wmf &&
+          make &&
+          checkinstall --pkgversion=$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f1) -d2 &&
+          ldconfig &&
+          mv imagemagick_*.deb ../binaries/
+
+      - name: magick --version
+        run: magick --version
+
+      - name: magick -list format
+        run: magick -list format
+
+      - name: Prefix binaries with Ubuntu versiom
+        run: cd binaries && for f in * ; do mv -- "$f" "${{ matrix.ubuntu-version }}_$f" ; done
+
+      - name: List binaries
+        run: ls binaries
+
+      - name: Upload binaries to GitHub Release
+        if: contains(github.ref, 'tags')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
+          bash ./upload.sh binaries/*
