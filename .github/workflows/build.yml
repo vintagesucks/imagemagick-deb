@@ -133,7 +133,7 @@ jobs:
           --without-pango
           --without-wmf &&
           make &&
-          checkinstall --pkgversion=$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f1) -d2 &&
+          checkinstall --pkgversion=$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f1) &&
           ldconfig &&
           mv imagemagick_*.deb ../binaries/
 
