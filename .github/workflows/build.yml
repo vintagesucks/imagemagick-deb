@@ -149,6 +149,12 @@ jobs:
       - name: List binaries
         run: ls binaries
 
+      - name: Archive binary artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: binaries
+          path: binaries
+
       - name: Upload binaries to GitHub Release
         if: contains(github.ref, 'tags')
         env:
