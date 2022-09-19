@@ -113,7 +113,7 @@ jobs:
           --disable-dependency-tracking
           --disable-opencl
           --disable-silent-rules
-          --disable-shared
+          --enable-shared
           --enable-openmp
           --enable-static
           --with-bzlib=yes
