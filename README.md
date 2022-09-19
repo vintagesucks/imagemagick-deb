@@ -10,9 +10,9 @@
 ```sh
 apt-get update
 apt-get install -y wget libbz2-dev libfontconfig1-dev libfreetype-dev libgs-dev liblcms2-dev liblzma-dev libopenexr-dev libopenjp2-7-dev libjpeg-turbo8-dev libpng-dev liblqr-1-0-dev libglib2.0-dev libraw-dev libtiff-dev libwebp-dev libxml2-dev libx11-dev libx265-dev libaom-dev zlib1g
-wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.2/jammy_libde265_1.0.8-1_amd64.deb
-wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.2/jammy_libheif_1.13.0-1_amd64.deb
-wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.2/jammy_imagemagick_7.1.0-48_amd64.deb
+wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.4/jammy_libde265_1.0.8-1_amd64.deb
+wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.4/jammy_libheif_1.13.0-1_amd64.deb
+wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.4/jammy_imagemagick_7.1.0-48_amd64.deb
 dpkg -i jammy_libde265_1.0.8-1_amd64.deb
 dpkg -i jammy_libheif_1.13.0-1_amd64.deb
 dpkg -i jammy_imagemagick_7.1.0-48_amd64.deb
