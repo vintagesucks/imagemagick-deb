@@ -10,22 +10,22 @@
 ```sh
 apt-get update
 apt-get install -y wget libbz2-dev libfontconfig1-dev libfreetype-dev libgs-dev liblcms2-dev liblzma-dev libopenexr-dev libopenjp2-7-dev libjpeg-turbo8-dev libpng-dev liblqr-1-0-dev libglib2.0-dev libraw-dev libtiff-dev libwebp-dev libxml2-dev libx11-dev libx265-dev libaom-dev zlib1g
-wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.4/jammy_libde265_1.0.8-1_amd64.deb
-wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.4/jammy_libheif_1.13.0-1_amd64.deb
-wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.4/jammy_imagemagick_7.1.0-48_amd64.deb
+wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.5/jammy_libde265_1.0.8-1_amd64.deb
+wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.5/jammy_libheif_1.13.0-1_amd64.deb
+wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.5/jammy_imagemagick_7.1.0-51_amd64.deb
 dpkg -i jammy_libde265_1.0.8-1_amd64.deb
 dpkg -i jammy_libheif_1.13.0-1_amd64.deb
-dpkg -i jammy_imagemagick_7.1.0-48_amd64.deb
+dpkg -i jammy_imagemagick_7.1.0-51_amd64.deb
 ldconfig
 ```
 
 #### Example Output (Ubuntu 22.04)
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.0-48 Q16-HDRI x86_64 c1ca24765:20220910 https://imagemagick.org
+Version: ImageMagick 7.1.0-51 Q16-HDRI x86_64 1cf41df5d:20221013 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
-Features: Cipher DPC HDRI Modules OpenMP(4.5)
+Features: Cipher DPC HDRI Modules OpenMP(4.5) 
 Delegates (built-in): bzlib fontconfig freetype gslib heic jbig jng jp2 jpeg lcms lqr ltdl lzma openexr png ps raw tiff webp x xml zlib
 Compiler: gcc (11.2)
 
@@ -88,7 +88,7 @@ $ magick -list format
       DPX* DPX       rw-   SMPTE 268M-2003 (DPX 2.0)
            Digital Moving Picture Exchange Bitmap, Version 2.0.
            See SMPTE 268M-2003 specification at http://www.smtpe.org
-
+           
      DXT1* DDS       rw+   Microsoft DirectDraw Surface
      DXT5* DDS       rw+   Microsoft DirectDraw Surface
      EPDF  PDF       rw-   Encapsulated Portable Document Format
@@ -109,7 +109,7 @@ $ magick -list format
            they are tall but computer displays use square pixels, therefore
            FAX images may appear to be narrow unless they are explicitly
            resized using a geometry of "150x100%".
-
+           
        FF* FARBFELD  rw-   Farbfeld
      FILE* URL       r--   Uniform Resource Locator (file://)
      FITS* FITS      rw-   Flexible Image Transport System
