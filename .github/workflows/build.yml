@@ -19,7 +19,7 @@ jobs:
           - jammy
         libde265-version: ["1.0.8"]
         libheif-version: ["1.13.0"]
-        imagemagick-version: ["7.1.0-48"]
+        imagemagick-version: ["7.1.0-51"]
 
     container:
       image: ubuntu:${{ matrix.ubuntu-version }}
