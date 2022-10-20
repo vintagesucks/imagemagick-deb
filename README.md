@@ -13,9 +13,9 @@ apt-get install -y wget
 wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.6/jammy_libde265_1.0.8-1_amd64.deb
 wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.6/jammy_libheif_1.13.0-1_amd64.deb
 wget https://github.com/vintagesucks/imagemagick-deb/releases/download/v0.0.6/jammy_imagemagick_7.1.0-51_amd64.deb
-apt install -y ./jammy_imagemagick_7.1.0-51_amd64-requires-test.deb
 apt install -y ./jammy_libde265_1.0.8-1_amd64.deb
 apt install -y ./jammy_libheif_1.13.0-1_amd64.deb
+apt install -y ./jammy_imagemagick_7.1.0-51_amd64.deb
 ldconfig
 ```
 
