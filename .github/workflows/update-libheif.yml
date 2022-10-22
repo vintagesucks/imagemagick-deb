@@ -1,4 +1,4 @@
-+name: Update libheif
+name: Update libheif
 
 on:
   workflow_dispatch:
