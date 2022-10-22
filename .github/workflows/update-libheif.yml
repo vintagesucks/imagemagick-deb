@@ -25,7 +25,6 @@ jobs:
         with:
             token: ${{ secrets.PAT }}
             commit-message: 'Bump libheif to ${{steps.version.outputs.prop}}'
-            committer: 'Nikolas Evers <vintagesucks@users.noreply.github.com>'
             branch: 'libheif-${{steps.version.outputs.prop}}'
             delete-branch: true
             title: 'Bump libheif to ${{steps.version.outputs.prop}}'
