@@ -182,4 +182,4 @@ jobs:
           delete-branch: true
           title: '${{ github.event.pull_request.title }}'
           body: '${{ github.event.pull_request.body }}'
-          base: 'main'
+          base: '${{ github.ref_name }}'
