@@ -136,7 +136,7 @@ jobs:
       - name: Update README
         if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
         run: |
-          sed -i '' '/#### Example Output/q' README.md
+          sed -i '/#### Example Output/q' ./README.md
           echo '```' >> README.md
           echo '$ magick --version' >> README.md
           magick --version >> README.md
