@@ -17,8 +17,8 @@ jobs:
         with: 
             path: 'version.json'
             prop_path: 'tag_name'
-      - run: sed -i 's/libde265-version: .*$/libde265-version: [\"${{steps.version.outputs.prop}}\"]/g' .github/workflows/build.yml
-      - run: sed -i 's/libde265-version: \[\"v/libde265-version: \[\"/g' .github/workflows/build.yml
+      - run: "sed -i 's/libde265-version: .*$/libde265-version: [\"${{steps.version.outputs.prop}}\"]/g' .github/workflows/build.yml"
+      - run: "sed -i 's/\"v/\"/g' .github/workflows/build.yml"
       - run: rm version.json
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.0.4
