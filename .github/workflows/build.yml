@@ -175,10 +175,11 @@ jobs:
         if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
         uses: peter-evans/create-pull-request@v4.2.0
         with:
-            token: ${{ secrets.PAT }}
-            commit-message: 'Update README [skip ci]'
-            committer: 'Nikolas Evers <vintagesucks@users.noreply.github.com>'
-            branch: '${{ github.ref_name }}'
-            delete-branch: true
-            title: '${{ github.event.pull_request.title }}'
-            body: '${{ github.event.pull_request.body }}'
+          token: ${{ secrets.PAT }}
+          commit-message: 'Update README [skip ci]'
+          committer: 'Nikolas Evers <vintagesucks@users.noreply.github.com>'
+          branch: '${{ github.ref_name }}'
+          delete-branch: true
+          title: '${{ github.event.pull_request.title }}'
+          body: '${{ github.event.pull_request.body }}'
+          base: 'main'
