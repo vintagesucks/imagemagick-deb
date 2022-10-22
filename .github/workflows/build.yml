@@ -131,7 +131,7 @@ jobs:
         run: magick -list format
 
       - name: Update README
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == jammy
         run: |
           sed -i '' '/#### Example Output/q' README.md
           echo '```' >> README.md
@@ -145,7 +145,7 @@ jobs:
           echo '```' >> README.md
 
       - name: Update Pull Request
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == jammy
         uses: peter-evans/create-pull-request@v4.2.0
         with:
             token: ${{ secrets.PAT }}
