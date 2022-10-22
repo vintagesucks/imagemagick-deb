@@ -154,6 +154,9 @@ jobs:
       - uses: actions/checkout@v3.1.0
         if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
 
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
+
       - name: Update README
         if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
         run: |
