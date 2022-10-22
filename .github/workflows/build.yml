@@ -161,12 +161,10 @@ jobs:
         if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
         run: |
           sed -i '/#### Example Output/q' ./README.md
-          echo '```' >> README.md
+          echo '```sh' >> README.md
           echo '$ magick --version' >> README.md
           magick --version >> README.md
-          echo '```' >> README.md
           echo '' >> README.md
-          echo '```' >> README.md
           echo '$ magick -list format' >> README.md
           magick -list format >> README.md
           echo '```' >> README.md
