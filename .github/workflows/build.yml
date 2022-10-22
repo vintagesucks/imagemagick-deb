@@ -2,6 +2,8 @@ name: Build
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
   push:
     tags:
       - "*"
@@ -45,8 +47,7 @@ jobs:
           wget
 
       - name: Install ImageMagick format dependencies
-        run: >
-          apt-get -y install ${{ matrix.imagemagick-dependencies }}
+        run: apt-get -y install ${{ matrix.imagemagick-dependencies }}
 
       - name: Build libde265 ${{ matrix.libde265-version }} from source
         run: |
@@ -116,7 +117,10 @@ jobs:
           --without-pango
           --without-wmf &&
           make &&
-          checkinstall --pkgversion=$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f1) --pkgrelease=$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f2) --requires=$(echo "${{ matrix.imagemagick-dependencies }}" | tr -s '[:blank:]' ',') &&
+          checkinstall 
+          --pkgversion=$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f1) 
+          --pkgrelease=$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f2) 
+          --requires=$(echo "${{ matrix.imagemagick-dependencies }}" | tr -s '[:blank:]' ',') &&
           ldconfig &&
           mv imagemagick_*.deb ../binaries/
 
