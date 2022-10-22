@@ -28,4 +28,4 @@ jobs:
             branch: 'imagemagick-${{steps.version.outputs.prop}}'
             delete-branch: true
             title: 'Bump ImageMagick to ${{steps.version.outputs.prop}}'
-            body: 'This pull request was [created automatically](https://github.com/vintagesucks/imagemagick-deb/blob/main/.github/workflows/update-imagemagick.yml).'
+            body: 'https://github.com/ImageMagick/ImageMagick/releases/tag/${{steps.version.outputs.prop}}'

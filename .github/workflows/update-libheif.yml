@@ -29,4 +29,4 @@ jobs:
             branch: 'libheif-${{steps.version.outputs.prop}}'
             delete-branch: true
             title: 'Bump libheif to ${{steps.version.outputs.prop}}'
-            body: 'This pull request was [created automatically](https://github.com/vintagesucks/imagemagick-deb/blob/main/.github/workflows/update-libheif.yml).'
+            body: 'https://github.com/strukturag/libheif/releases/tag/${{steps.version.outputs.prop}}'
