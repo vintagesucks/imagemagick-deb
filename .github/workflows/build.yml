@@ -28,6 +28,9 @@ jobs:
       image: ubuntu:${{ matrix.ubuntu-version }}
       options: --user root
     steps:
+      - uses: actions/checkout@v3.1.0
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == jammy
+
       - name: Create binaries folder
         run: mkdir binaries
 
