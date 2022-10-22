@@ -1,5 +1,5 @@
 # imagemagick-deb
-[![Build](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/build.yml/badge.svg)](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/build.yml)
+[![Build](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/build.yml/badge.svg)](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/build.yml) [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 
 [ImageMagick](https://imagemagick.org/) packaging for Ubuntu built with [CheckInstall](https://asic-linux.com.mx/~izto/checkinstall/).
 
