@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    name: "ImageMagick ${{ matrix.imagemagick-version }} (${{ matrix.ubuntu-version }})"
+    name: "Build (${{ matrix.ubuntu-version }})"
     runs-on: ubuntu-latest
     strategy:
       matrix:
