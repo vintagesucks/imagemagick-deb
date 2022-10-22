@@ -29,7 +29,7 @@ jobs:
       options: --user root
     steps:
       - uses: actions/checkout@v3.1.0
-        if: github.event_name == 'pull_request' && matrix.ubuntu-version == jammy
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
 
       - name: Create binaries folder
         run: mkdir binaries
@@ -134,7 +134,7 @@ jobs:
         run: magick -list format
 
       - name: Update README
-        if: github.event_name == 'pull_request' && matrix.ubuntu-version == jammy
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
         run: |
           sed -i '' '/#### Example Output/q' README.md
           echo '```' >> README.md
@@ -148,11 +148,11 @@ jobs:
           echo '```' >> README.md
 
       - name: Update Pull Request
-        if: github.event_name == 'pull_request' && matrix.ubuntu-version == jammy
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
         uses: peter-evans/create-pull-request@v4.2.0
         with:
             token: ${{ secrets.PAT }}
-            commit-message: 'Update README'
+            commit-message: 'Update README [skip ci]'
             branch: '${{ github.ref_name }}'
             delete-branch: true
             title: '${{ github.event.pull_request.title }}'
