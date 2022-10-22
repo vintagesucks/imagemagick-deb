@@ -28,9 +28,6 @@ jobs:
       image: ubuntu:${{ matrix.ubuntu-version }}
       options: --user root
     steps:
-      - uses: actions/checkout@v3.1.0
-        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
-
       - name: Create binaries folder
         run: mkdir binaries
 
@@ -133,31 +130,6 @@ jobs:
       - name: magick -list format
         run: magick -list format
 
-      - name: Update README
-        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
-        run: |
-          sed -i '/#### Example Output/q' ./README.md
-          echo '```' >> README.md
-          echo '$ magick --version' >> README.md
-          magick --version >> README.md
-          echo '```' >> README.md
-          echo '' >> README.md
-          echo '```' >> README.md
-          echo '$ magick -list format' >> README.md
-          magick -list format >> README.md
-          echo '```' >> README.md
-
-      - name: Update Pull Request
-        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
-        uses: peter-evans/create-pull-request@v4.2.0
-        with:
-            token: ${{ secrets.PAT }}
-            commit-message: 'Update README [skip ci]'
-            branch: '${{ github.ref_name }}'
-            delete-branch: true
-            title: '${{ github.event.pull_request.title }}'
-            body: '${{ github.event.pull_request.body }}'
-
       - name: Prefix binaries with Ubuntu version
         run: cd binaries && for f in * ; do mv -- "$f" "${{ matrix.ubuntu-version }}_$f" ; done
 
@@ -178,3 +150,32 @@ jobs:
           set -e
           wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
           bash ./upload.sh binaries/*
+
+      - uses: actions/checkout@v3.1.0
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
+
+      - name: Update README
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
+        run: |
+          sed -i '/#### Example Output/q' ./README.md
+          echo '```' >> README.md
+          echo '$ magick --version' >> README.md
+          magick --version >> README.md
+          echo '```' >> README.md
+          echo '' >> README.md
+          echo '```' >> README.md
+          echo '$ magick -list format' >> README.md
+          magick -list format >> README.md
+          echo '```' >> README.md
+
+      - name: Update Pull Request
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
+        uses: peter-evans/create-pull-request@v4.2.0
+        with:
+            token: ${{ secrets.PAT }}
+            commit-message: 'Update README [skip ci]'
+            committer: 'Nikolas Evers <vintagesucks@users.noreply.github.com>'
+            branch: '${{ github.ref_name }}'
+            delete-branch: true
+            title: '${{ github.event.pull_request.title }}'
+            body: '${{ github.event.pull_request.body }}'
