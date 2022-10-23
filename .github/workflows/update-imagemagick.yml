@@ -24,7 +24,6 @@ jobs:
         with:
             token: ${{ secrets.PAT }}
             commit-message: 'Bump ImageMagick to ${{steps.version.outputs.prop}}'
-            author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
             committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
             branch: 'imagemagick-${{steps.version.outputs.prop}}'
             delete-branch: true
