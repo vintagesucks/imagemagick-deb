@@ -25,7 +25,6 @@ jobs:
         with:
             token: ${{ secrets.PAT }}
             commit-message: 'Bump libde265 to ${{steps.version.outputs.prop}}'
-            author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
             committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
             branch: 'libde265-${{steps.version.outputs.prop}}'
             delete-branch: true
