@@ -178,7 +178,8 @@ jobs:
           git commit -m "Update README [skip ci]" -a
 
       - name: Push README update to Pull Request
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ github.ref_name }}
+          branch: ${{ github.head_ref }}
