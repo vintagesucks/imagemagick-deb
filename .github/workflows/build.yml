@@ -168,12 +168,16 @@ jobs:
           echo '$ magick -list format' >> README.md
           magick -list format >> README.md
           echo '```' >> README.md
-          git config --local user.email "vintagesucks@users.noreply.github.com"
-          git config --local user.name "Nikolas Evers"
-          git commit -m "Update README [skip ci]" -a          
 
-      - name: Update Pull Request
+      - name: Commit README update
+        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Update README [skip ci]" -a
+
+      - name: Push README update to Pull Request
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: ${{ secrets.PAT }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref_name }}

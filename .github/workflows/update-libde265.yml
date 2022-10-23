@@ -23,9 +23,9 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4.2.0
         with:
-            token: ${{ secrets.PAT }}
+            token: ${{ secrets.GITHUB_TOKEN }}
             commit-message: 'Bump libde265 to ${{steps.version.outputs.prop}}'
-            committer: 'Nikolas Evers <vintagesucks@users.noreply.github.com>'
+            committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
             branch: 'libde265-${{steps.version.outputs.prop}}'
             delete-branch: true
             title: 'Bump libde265 to ${{steps.version.outputs.prop}}'
