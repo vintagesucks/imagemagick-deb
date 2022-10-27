@@ -8,6 +8,7 @@
 
 #### Example Setup (Ubuntu 22.04)
 ```sh
+apt-get update
 apt install ./jammy_libde265_*.deb
 apt install ./jammy_libheif_*.deb
 apt install -y ./jammy_imagemagick_*.deb
