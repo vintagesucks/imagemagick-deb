@@ -18,12 +18,12 @@ ldconfig
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.0-51 Q16-HDRI x86_64 1cf41df5d:20221013 https://imagemagick.org
+Version: ImageMagick 7.1.0-52 Q16-HDRI x86_64 36d3408b5:20221106 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
 Delegates (built-in): bzlib fontconfig freetype gslib heic jbig jng jp2 jpeg lcms lqr ltdl lzma openexr png ps raw tiff webp x xml zlib
-Compiler: gcc (11.2)
+Compiler: gcc (11.3)
 
 $ magick -list format
    Format  Module    Mode  Description

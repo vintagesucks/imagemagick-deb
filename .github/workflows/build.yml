@@ -21,7 +21,7 @@ jobs:
           - jammy
         libde265-version: ["1.0.9"]
         libheif-version: ["1.13.0"]
-        imagemagick-version: ["7.1.0-51"]
+        imagemagick-version: ["7.1.0-52"]
         imagemagick-dependencies: ["libbz2-dev libfontconfig1-dev libfreetype-dev libgs-dev liblcms2-dev liblzma-dev libopenexr-dev libopenjp2-7-dev libjpeg-turbo8-dev libpng-dev liblqr-1-0-dev libglib2.0-dev libraw-dev libtiff-dev libwebp-dev libxml2-dev libx11-dev libx265-dev libaom-dev zlib1g libltdl7"]
 
     container:
