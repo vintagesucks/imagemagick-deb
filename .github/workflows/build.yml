@@ -45,9 +45,6 @@ jobs:
           software-properties-common
           wget
 
-      - name: Install ImageMagick format dependencies
-        run: apt-get -y install ${{ matrix.imagemagick-dependencies }}
-
       - name: Build libde265 ${{ matrix.libde265-version }} from source
         run: |
           git clone --depth 1 --branch v${{ matrix.libde265-version }} https://github.com/strukturag/libde265.git
@@ -67,6 +64,9 @@ jobs:
           make
           checkinstall --pkgversion="${{ matrix.libheif-version }}"
           mv libheif_*.deb ../binaries/
+
+      - name: Install ImageMagick format dependencies
+        run: apt-get -y install ${{ matrix.imagemagick-dependencies }}
 
       - name: Check ImageMagick dependencies
         run: |
