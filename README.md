@@ -10,7 +10,7 @@
 ```sh
 apt-get update
 apt install ./jammy_libde265_*.deb
-apt install ./jammy_libheif_*.deb
+apt install -y ./jammy_libheif_*.deb
 apt install -y ./jammy_imagemagick_*.deb
 ldconfig
 ```
@@ -38,7 +38,7 @@ $ magick -list format
       ARW  DNG       r--   Sony Alpha Raw Image Format (0.20.2-Release)
    ASHLAR* ASHLAR    -w+   Image sequence laid out in continuous irregular courses
       AVI  VIDEO     r--   Microsoft Audio/Visual Interleaved
-     AVIF  HEIC      rw+   AV1 Image File Format (1.13.0)
+     AVIF  HEIC      rw+   AV1 Image File Format (1.14.0)
       AVS* AVS       rw+   AVS X image
     BAYER* BAYER     rw+   Raw mosaiced samples
    BAYERA* BAYER     rw+   Raw mosaiced and alpha samples
@@ -126,8 +126,8 @@ $ magick -list format
        GV  DOT       ---   Graphviz
      HALD* HALD      r--   Identity Hald color lookup table image
       HDR* HDR       rw+   Radiance RGBE image format
-     HEIC  HEIC      rw+   High Efficiency Image Format (1.13.0)
-     HEIF  HEIC      rw+   High Efficiency Image Format (1.13.0)
+     HEIC  HEIC      rw+   High Efficiency Image Format (1.14.0)
+     HEIF  HEIC      rw+   High Efficiency Image Format (1.14.0)
 HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       HRZ* HRZ       rw-   Slow Scan TeleVision
       HTM* HTML      -w-   Hypertext Markup Language and a client-side image map
