@@ -152,9 +152,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          set -e
-          wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-          bash ./upload.sh binaries/*
+          apt-get -y install gh
+          gh release upload ${{ github.ref_name }} binaries/*
 
       - uses: actions/checkout@v3.1.0
         if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
