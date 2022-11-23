@@ -180,7 +180,8 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git diff-index --quiet HEAD || git commit -m "Update README [skip ci]" -a
+          git add -A
+          git diff-index --quiet HEAD || git commit -m "Update README [skip ci]"
 
       - name: Push README update to Pull Request
         if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
