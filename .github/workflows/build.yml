@@ -22,6 +22,7 @@ jobs:
         libheif-version: ["1.14.0"]
         libheif-dependencies: ["libx265-dev libaom-dev"]
         imagemagick-version: ["7.1.0-52"]
+        imagemagick-epoch: ["8:"]
         imagemagick-dependencies: ["libbz2-dev libfontconfig1-dev libfreetype-dev libgs-dev liblcms2-dev liblzma-dev libopenexr-dev libopenjp2-7-dev libjpeg-turbo8-dev libpng-dev liblqr-1-0-dev libglib2.0-dev libraw-dev libtiff-dev libwebp-dev libxml2-dev libx11-dev zlib1g libltdl7"]
 
     container:
@@ -123,7 +124,7 @@ jobs:
           --without-wmf &&
           make &&
           checkinstall 
-          --pkgversion=$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f1) 
+          --pkgversion=${{ matrix.imagemagick-epoch }}$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f1) 
           --pkgrelease=$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f2) 
           --requires=$(echo "${{ matrix.imagemagick-dependencies }}" | tr -s '[:blank:]' ',') &&
           ldconfig &&
@@ -179,7 +180,8 @@ jobs:
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "Update README [skip ci]" -a
+          git add -A
+          git diff-index --quiet HEAD || git commit -m "Update README [skip ci]"
 
       - name: Push README update to Pull Request
         if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
