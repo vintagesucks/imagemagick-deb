@@ -18,7 +18,7 @@ ldconfig
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.0-52 Q16-HDRI x86_64 36d3408b5:20221106 https://imagemagick.org
+Version: ImageMagick 7.1.0-53 Q16-HDRI x86_64 c91ce2143:20221204 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -108,12 +108,12 @@ $ magick -list format
            
        FF* FARBFELD  rw-   Farbfeld
      FILE* URL       r--   Uniform Resource Locator (file://)
-     FITS* FITS      rw-   Flexible Image Transport System
+     FITS* FITS      rw+   Flexible Image Transport System
      FL32* FL32      rw-   FilmLight
       FLV  VIDEO     rw+   Flash Video Stream
   FRACTAL* PLASMA    r--   Plasma fractal image
       FTP* URL       r--   Uniform Resource Locator (ftp://)
-      FTS* FITS      rw-   Flexible Image Transport System
+      FTS* FITS      rw+   Flexible Image Transport System
      FTXT* FTXT      rw-   Formatted text image
        G3* FAX       rw-   Group 3 FAX
        G4* FAX       rw-   Group 4 FAX
