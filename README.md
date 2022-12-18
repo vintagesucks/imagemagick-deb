@@ -18,7 +18,7 @@ ldconfig
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.0-53 Q16-HDRI x86_64 c91ce2143:20221204 https://imagemagick.org
+Version: ImageMagick 7.1.0-55 Q16-HDRI x86_64 b7b8950e7:20221217 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
