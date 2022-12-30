@@ -21,7 +21,7 @@ jobs:
         libde265-version: ["1.0.9"]
         libheif-version: ["1.14.0"]
         libheif-dependencies: ["libx265-dev libaom-dev"]
-        imagemagick-version: ["7.1.0-55"]
+        imagemagick-version: ["7.1.0-56"]
         imagemagick-epoch: ["8:"]
         imagemagick-dependencies: ["libbz2-dev libfontconfig1-dev libfreetype-dev libgs-dev liblcms2-dev liblzma-dev libopenexr-dev libopenjp2-7-dev libjpeg-turbo8-dev libpng-dev liblqr-1-0-dev libglib2.0-dev libraw-dev libtiff-dev libwebp-dev libxml2-dev libx11-dev zlib1g libltdl7"]
 
