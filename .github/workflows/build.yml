@@ -19,7 +19,7 @@ jobs:
         ubuntu-version:
           - jammy
         libde265-version: ["1.0.9"]
-        libheif-version: ["1.14.0"]
+        libheif-version: ["1.14.1"]
         libheif-dependencies: ["libx265-dev libaom-dev"]
         imagemagick-version: ["7.1.0-57"]
         imagemagick-epoch: ["8:"]
