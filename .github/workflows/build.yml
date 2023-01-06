@@ -157,7 +157,7 @@ jobs:
           wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
           bash ./upload.sh binaries/*
 
-      - uses: actions/checkout@v3.2.0
+      - uses: actions/checkout@v3.3.0
         if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
         with:
           persist-credentials: false
