@@ -3,6 +3,8 @@
 
 [ImageMagick](https://imagemagick.org/) packaging for Ubuntu built with [CheckInstall](https://asic-linux.com.mx/~izto/checkinstall/).
 
+Goal: Functionality on par with the [ImageMagick Homebrew Formula](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick.rb).
+
 > **Warning**  
 > [Released packages](https://github.com/vintagesucks/imagemagick-deb/releases) are for demonstration purposes only and are not suitable for production use.
 

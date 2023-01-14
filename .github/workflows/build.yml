@@ -100,7 +100,6 @@ jobs:
           git clone --depth 1 --branch ${{ matrix.imagemagick-version }} https://github.com/ImageMagick/ImageMagick.git imagemagick &&
           cd imagemagick &&
           ./configure
-          --disable-dependency-tracking
           --disable-opencl
           --disable-silent-rules
           --enable-shared
@@ -119,6 +118,7 @@ jobs:
           --with-raw=yes
           --with-webp=yes
           --with-xml=yes
+          --without-djvu
           --without-fftw
           --without-pango
           --without-wmf &&
