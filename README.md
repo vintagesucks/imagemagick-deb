@@ -20,7 +20,7 @@ ldconfig
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.0-57 Q16-HDRI x86_64 d68553b17:20221230 https://imagemagick.org
+Version: ImageMagick 7.1.0-58 Q16-HDRI x86_64 d7007d7a1:20230121 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -227,7 +227,7 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       PNG* PNG       rw-   Portable Network Graphics (libpng 1.6.37)
            See http://www.libpng.org/ for details about the PNG format.
     PNG00* PNG       rw-   PNG inheriting bit-depth, color-type from original, if possible
-    PNG24* PNG       rw-   opaque or binary transparent 24-bit RGB (zlib 1.2.11)
+    PNG24* PNG       rw-   opaque or binary transparent 24-bit RGB
     PNG32* PNG       rw-   opaque or transparent 32-bit RGBA
     PNG48* PNG       rw-   opaque or binary transparent 48-bit RGB
     PNG64* PNG       rw-   opaque or transparent 64-bit RGBA
@@ -296,7 +296,7 @@ THUMBNAIL* THUMBNAIL -w+   EXIF Profile Thumbnail
      WEBM  VIDEO     rw+   Open Web Media
      WEBP* WEBP      rw+   WebP Image Format (libwebp 1.2.2 [020F])
       WMV  VIDEO     rw+   Windows Media Video
-      WPG* WPG       r--   Word Perfect Graphics
+      WPG* WPG       rw-   Word Perfect Graphics
         X* X         rw+   X Image
       X3F  DNG       r--   Sigma Camera RAW Picture File (0.20.2-Release)
       XBM* XBM       rw-   X Windows system bitmap (black and white)
