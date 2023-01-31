@@ -142,7 +142,7 @@ jobs:
         run: cd binaries && for f in * ; do mv -- "$f" "${{ matrix.ubuntu-version }}_$f" ; done
 
       - name: List binaries
-        run: ls binaries
+        run: ls -lah binaries
 
       - name: Archive binary artifacts
         uses: actions/upload-artifact@v3
