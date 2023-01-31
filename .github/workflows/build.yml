@@ -18,7 +18,7 @@ jobs:
       matrix:
         ubuntu-version:
           - jammy
-        libde265-version: ["1.0.9"]
+        libde265-version: ["1.0.10"]
         libheif-version: ["1.14.2"]
         libheif-dependencies: ["libx265-dev libaom-dev"]
         imagemagick-version: ["7.1.0-58"]
