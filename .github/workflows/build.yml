@@ -40,6 +40,7 @@ jobs:
           autoconf
           build-essential
           checkinstall
+          cmake
           curl
           git
           libtool
@@ -64,13 +65,14 @@ jobs:
         run: >
           git clone --depth 1 --branch v${{ matrix.libheif-version }} https://github.com/strukturag/libheif.git &&
           cd libheif &&
-          ./autogen.sh &&
-          ./configure &&
-          make &&
+          mkdir build &&
+          cd build &&
+          cmake .. &&
           checkinstall 
+          --pkgname="libheif" 
           --pkgversion="${{ matrix.libheif-version }}" 
           --requires=$(echo "${{ matrix.libheif-dependencies }}" | tr -s '[:blank:]' ',') &&
-          mv libheif_*.deb ../binaries/
+          mv libheif_*.deb ../../binaries/
 
       - name: Install ImageMagick format dependencies
         run: apt-get -y install ${{ matrix.imagemagick-dependencies }}
