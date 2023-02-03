@@ -21,17 +21,17 @@ jobs:
         continue-on-error: true
 
       - name: Build packages
-        run: DOCKER_BUILDKIT=1 docker build --output binaries .
+        run: DOCKER_BUILDKIT=1 docker build --tag imagemagick-deb --output binaries .
 
       - name: List packages
         run: ls -lah binaries
 
       - name: Install packages
         run: |
-          apt-get update
-          apt install ./binaries/libde265_*.deb
-          apt install -y ./binaries/libheif_*.deb
-          apt install -y ./binaries/imagemagick_*.deb
+          sudo apt-get update
+          sudo apt install ./binaries/libde265_*.deb
+          sudo apt install -y ./binaries/libheif_*.deb
+          sudo apt install -y ./binaries/imagemagick_*.deb
 
       - name: magick --version
         run: magick --version
