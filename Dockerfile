@@ -42,7 +42,7 @@ RUN pkg-config --exists --print-errors "OpenEXR >= 1.0.6"
 RUN pkg-config --exists --print-errors "zlib >= 1.0.0"
 
 # Build libde265 from source
-ENV LIBDE265_VERSION="1.0.9"
+ENV LIBDE265_VERSION="1.0.11"
 RUN git clone --depth 1 --branch v$LIBDE265_VERSION https://github.com/strukturag/libde265.git
 WORKDIR libde265
 RUN ./autogen.sh
