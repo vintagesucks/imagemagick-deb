@@ -15,8 +15,7 @@ jobs:
     name: "Build"
     runs-on: ubuntu-22.04
     steps:
-      - name: Create binaries folder
-        run: mkdir binaries
+      - uses: actions/checkout@v3.3.0
 
       - uses: jpribyl/action-docker-layer-caching@v0.1.1
         continue-on-error: true
