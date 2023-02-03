@@ -95,13 +95,13 @@ RUN ./configure \
   --without-fftw \
   --without-pango \
   --without-wmf
-  RUN make
-  RUN checkinstall \
-    --pkgversion=$IMAGEMAGICK_EPOCH$(echo "$IMAGEMAGICK_VERSION" | cut -d- -f1) \
-    --pkgrelease=$(echo "$IMAGEMAGICK_VERSION" | cut -d- -f2) \
-    --requires=$(echo "$IMAGEMAGICK_DEPENDENCIES" | tr -s '[:blank:]' ',')
-  RUN ldconfig
-  RUN mv imagemagick_*.deb ../binaries/
+RUN make
+RUN checkinstall \
+  --pkgversion=$IMAGEMAGICK_EPOCH$(echo "$IMAGEMAGICK_VERSION" | cut -d- -f1) \
+  --pkgrelease=$(echo "$IMAGEMAGICK_VERSION" | cut -d- -f2) \
+  --requires=$(echo "$IMAGEMAGICK_DEPENDENCIES" | tr -s '[:blank:]' ',')
+RUN ldconfig
+RUN mv imagemagick_*.deb ../binaries/
 WORKDIR /
 
 # Prefix binaries with Ubuntu codename
