@@ -69,7 +69,7 @@ WORKDIR /
 
 # Build ImageMagick from source
 ENV IMAGEMAGICK_EPOCH="8:"
-ENV IMAGEMAGICK_VERSION="7.1.0-58"
+ENV IMAGEMAGICK_VERSION="7.1.0-60"
 RUN git clone --depth 1 --branch $IMAGEMAGICK_VERSION https://github.com/ImageMagick/ImageMagick.git imagemagick
 WORKDIR imagemagick
 RUN ./configure \
