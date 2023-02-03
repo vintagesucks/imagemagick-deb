@@ -1,21 +1,32 @@
 # imagemagick-deb
 [![Build](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/build.yml/badge.svg)](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/build.yml) [![Update ImageMagick](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-imagemagick.yml/badge.svg)](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-imagemagick.yml) [![Update libde265](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-libde265.yml/badge.svg)](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-libde265.yml) [![Update libheif](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-libheif.yml/badge.svg)](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-libheif.yml) [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 
-[ImageMagick](https://imagemagick.org/) packaging for Ubuntu built with [CheckInstall](https://asic-linux.com.mx/~izto/checkinstall/).
+[ImageMagick](https://imagemagick.org/) packaging for Ubuntu 22.04 built with [CheckInstall](https://asic-linux.com.mx/~izto/checkinstall/).
 
-Goal: Functionality on par with the [ImageMagick Homebrew Formula](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick.rb).
+Goals:
+* [x] Functionality on par with the [ImageMagick Homebrew Formula](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick.rb)
+* [x] Compatibility with the [Imagick php extension](https://pecl.php.net/package/imagick) (PECL)
 
 > **Warning**  
 > [Released packages](https://github.com/vintagesucks/imagemagick-deb/releases) are for demonstration purposes only and are not suitable for production use.
 
-#### Example Setup (Ubuntu 22.04)
+#### Building
+```sh
+DOCKER_BUILDKIT=1 docker build --output binaries .
+```
+
+The packages can be found in the `./binaries` folder after the build.
+
+#### Example Setup
 ```sh
 apt-get update
-apt install ./jammy_libde265_*.deb
-apt install -y ./jammy_libheif_*.deb
-apt install -y ./jammy_imagemagick_*.deb
+apt install ./binaries/libde265_*.deb
+apt install -y ./binaries/libheif_*.deb
+apt install -y ./binaries/imagemagick_*.deb
 ldconfig
 ```
+
+The packages will automatically resolve their own dependencies when installed with `-y`.
 
 #### Example Output
 ```sh
