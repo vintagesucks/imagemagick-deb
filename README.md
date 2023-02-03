@@ -5,7 +5,7 @@
 
 Goals:
 * [x] Functionality on par with the [ImageMagick Homebrew Formula](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick.rb)
-* [x] Compatibility with the [Imagick](https://pecl.php.net/package/imagick) php extension (PECL)
+* [x] Compatibility with the [Imagick php extension](https://pecl.php.net/package/imagick) (PECL)
 
 > **Warning**  
 > [Released packages](https://github.com/vintagesucks/imagemagick-deb/releases) are for demonstration purposes only and are not suitable for production use.
