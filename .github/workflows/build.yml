@@ -12,137 +12,29 @@ on:
 
 jobs:
   build:
-    name: "Build (${{ matrix.ubuntu-version }})"
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ubuntu-version:
-          - jammy
-        libde265-version: ["1.0.9"]
-        libheif-version: ["1.14.2"]
-        libheif-dependencies: ["libx265-dev libaom-dev"]
-        imagemagick-version: ["7.1.0-58"]
-        imagemagick-epoch: ["8:"]
-        imagemagick-dependencies: ["libbz2-dev libfontconfig1-dev libfreetype-dev libgs-dev liblcms2-dev liblzma-dev libopenexr-dev libopenjp2-7-dev libjpeg-turbo8-dev libpng-dev liblqr-1-0-dev libglib2.0-dev libraw-dev libtiff-dev libwebp-dev libxml2-dev libx11-dev zlib1g libltdl7"]
-
-    container:
-      image: ubuntu:${{ matrix.ubuntu-version }}
-      options: --user root
+    name: "Build"
+    runs-on: ubuntu-22.04
     steps:
-      - name: Create binaries folder
-        run: mkdir binaries
+      - uses: actions/checkout@v3.3.0
 
-      - name: Install build dependencies
-        run: >
-          export DEBIAN_FRONTEND=noninteractive &&
-          apt-get update &&
-          apt-get -y install
-          autoconf
-          build-essential
-          checkinstall
-          cmake
-          curl
-          git
-          libtool
-          pkg-config
-          software-properties-common
-          wget
+      - name: Build packages
+        run: DOCKER_BUILDKIT=1 docker build --tag imagemagick-deb --output binaries .
 
-      - name: Build libde265 ${{ matrix.libde265-version }} from source
+      - name: List packages
+        run: ls -lah binaries
+
+      - name: Install packages
         run: |
-          git clone --depth 1 --branch v${{ matrix.libde265-version }} https://github.com/strukturag/libde265.git
-          cd libde265
-          ./autogen.sh
-          ./configure
-          make
-          checkinstall --pkgversion="${{ matrix.libde265-version }}"
-          mv libde265_*.deb ../binaries/
-
-      - name: Install libheif dependencies
-        run: apt-get -y install ${{ matrix.libheif-dependencies }}
-
-      - name: Build libheif ${{ matrix.libheif-version }} from source
-        run: >
-          git clone --depth 1 --branch v${{ matrix.libheif-version }} https://github.com/strukturag/libheif.git &&
-          cd libheif &&
-          mkdir build &&
-          cd build &&
-          cmake .. &&
-          checkinstall 
-          --pkgname="libheif" 
-          --pkgversion="${{ matrix.libheif-version }}" 
-          --requires=$(echo "${{ matrix.libheif-dependencies }}" | tr -s '[:blank:]' ',') &&
-          mv libheif_*.deb ../../binaries/
-
-      - name: Install ImageMagick format dependencies
-        run: apt-get -y install ${{ matrix.imagemagick-dependencies }}
-
-      - name: Check ImageMagick dependencies
-        run: |
-          pkg-config --exists --print-errors "fontconfig >= 2.1.0" && echo "fontconfig succeeded" || echo "fontconfig failed"
-          pkg-config --exists --print-errors "freetype2 >= 2.8.0" && echo "freetype2 succeeded" || echo "freetype2 failed"
-          pkg-config --exists --print-errors "lcms2 >= 2.0.0" && echo "lcms2 succeeded" || echo "lcms2 failed"
-          pkg-config --exists --print-errors "libde265 >= 1.0.8" && echo "libde265 succeeded" || echo "libde265 failed"
-          pkg-config --exists --print-errors "libheif >= 1.13.0" && echo "libheif succeeded" || echo "libheif failed"
-          pkg-config --exists --print-errors "liblzma >= 2.9.0" && echo "liblzma succeeded" || echo "liblzma failed"
-          pkg-config --exists --print-errors "libopenjp2 >= 2.1.0" && echo "libopenjp2 succeeded" || echo "libopenjp2 failed"
-          pkg-config --exists --print-errors "libpng >= 1.0.0" && echo "libpng succeeded" || echo "libpng failed"
-          pkg-config --exists --print-errors "libtiff-4 >= 4.0.0" && echo "libtiff-4 succeeded" || echo "libtiff-4 failed"
-          pkg-config --exists --print-errors "libraw_r >= 0.14.8" && echo "libraw_r succeeded" || echo "libraw_r failed"
-          pkg-config --exists --print-errors "libwebp >= 0.6.1" && echo "libwebp succeeded" || echo "libwebp failed"
-          pkg-config --exists --print-errors "libwebpdemux >= 0.5.0" && echo "libwebpdemux succeeded" || echo "libwebpdemux failed"
-          pkg-config --exists --print-errors "libwebpmux >= 0.5.0" && echo "libwebpmux succeeded" || echo "libwebpmux failed"
-          pkg-config --exists --print-errors "libxml-2.0 >= 2.0.0" && echo "libxml-2.0 succeeded" || echo "libxml-2.0 failed"
-          pkg-config --exists --print-errors "lqr-1 >= 0.1.0" && echo "lqr-1 succeeded" || echo "lqr-1 failed"
-          pkg-config --exists --print-errors "OpenEXR >= 1.0.6" && echo "OpenEXR succeeded" || echo "OpenEXR failed"
-          pkg-config --exists --print-errors "zlib >= 1.0.0" && echo "zlib succeeded" || echo "zlib failed"
-
-      - name: Build ImageMagick ${{ matrix.imagemagick-version }} from source
-        run: >
-          git clone --depth 1 --branch ${{ matrix.imagemagick-version }} https://github.com/ImageMagick/ImageMagick.git imagemagick &&
-          cd imagemagick &&
-          ./configure
-          --disable-opencl
-          --disable-silent-rules
-          --enable-shared
-          --enable-openmp
-          --enable-static
-          --with-bzlib=yes
-          --with-fontconfig=yes
-          --with-freetype=yes
-          --with-gslib=yes
-          --with-lqr=yes
-          --with-gvc=no
-          --with-heic=yes
-          --with-modules
-          --with-openexr=yes
-          --with-openjp2
-          --with-raw=yes
-          --with-webp=yes
-          --with-xml=yes
-          --without-djvu
-          --without-fftw
-          --without-pango
-          --without-wmf &&
-          make &&
-          checkinstall 
-          --pkgversion=${{ matrix.imagemagick-epoch }}$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f1) 
-          --pkgrelease=$(echo "${{ matrix.imagemagick-version }}" | cut -d- -f2) 
-          --requires=$(echo "${{ matrix.imagemagick-dependencies }}" | tr -s '[:blank:]' ',') &&
-          ldconfig &&
-          mv imagemagick_*.deb ../binaries/
+          sudo apt-get update
+          sudo apt install ./binaries/libde265_*.deb
+          sudo apt install -y ./binaries/libheif_*.deb
+          sudo apt install -y ./binaries/imagemagick_*.deb
 
       - name: magick --version
         run: magick --version
 
       - name: magick -list format
         run: magick -list format
-
-      - name: Prefix binaries with Ubuntu version
-        run: cd binaries && for f in * ; do mv -- "$f" "${{ matrix.ubuntu-version }}_$f" ; done
-
-      - name: List binaries
-        run: ls binaries
 
       - name: Archive binary artifacts
         uses: actions/upload-artifact@v3
@@ -160,13 +52,13 @@ jobs:
           bash ./upload.sh binaries/*
 
       - uses: actions/checkout@v3.3.0
-        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
+        if: github.event_name == 'pull_request'
         with:
           persist-credentials: false
           fetch-depth: 0
 
       - name: Update README
-        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
+        if: github.event_name == 'pull_request'
         run: |
           sed -i '/#### Example Output/q' ./README.md
           echo '```sh' >> README.md
@@ -178,7 +70,7 @@ jobs:
           echo '```' >> README.md
 
       - name: Commit README update
-        if: github.event_name == 'pull_request' && matrix.ubuntu-version == 'jammy'
+        if: github.event_name == 'pull_request'
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
