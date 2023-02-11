@@ -1,6 +1,6 @@
 # Build Packages
 FROM --platform=linux/amd64 ubuntu:jammy as builder
-
+SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Create binaries folder
@@ -69,9 +69,7 @@ WORKDIR /
 
 # Set and validate ImageMagick epoch
 ENV IMAGEMAGICK_EPOCH="8:"
-SHELL ["/bin/bash", "-c"]
 RUN [[ $(apt-cache show imagemagick | grep Version) =~ $IMAGEMAGICK_EPOCH ]]
-SHELL ["/bin/sh", "-c"]
 
 # Build ImageMagick from source
 ENV IMAGEMAGICK_VERSION="7.1.0-61"
@@ -107,23 +105,21 @@ RUN checkinstall \
   --requires=$(echo "$IMAGEMAGICK_DEPENDENCIES" | tr -s '[:blank:]' ',')
 RUN ldconfig
 RUN mv imagemagick_*.deb ../binaries/
-SHELL ["/bin/bash", "-c"]
 RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) == $IMAGEMAGICK_EPOCH$IMAGEMAGICK_VERSION ]]
-SHELL ["/bin/sh", "-c"]
 WORKDIR /
 
 # Prefix binaries with Ubuntu codename
 WORKDIR binaries
-SHELL ["/bin/bash", "-c"]
 RUN CODENAME=$( . /etc/os-release ; echo $UBUNTU_CODENAME) && \
   for f in * ; do mv -i -- "$f" "${f//_amd64/~${CODENAME}_amd64}" ; done
-SHELL ["/bin/sh", "-c"]
 WORKDIR /
 
 # Test package install
 FROM --platform=linux/amd64 ubuntu:jammy as tester
 COPY --from=builder binaries binaries
+SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt-get update
 RUN apt install ./binaries/libde265_*.deb
 RUN apt install -y ./binaries/libheif_*.deb
@@ -135,7 +131,7 @@ RUN apt-get install -y software-properties-common
 RUN LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php && apt-get update
 RUN apt-get -y install php8.2 php-pear php-dev
 RUN printf "\n" | pecl upgrade imagick
-RUN /bin/bash -c "echo extension=imagick.so > /etc/php/8.2/mods-available/imagick.ini"
+RUN echo extension=imagick.so > /etc/php/8.2/mods-available/imagick.ini
 RUN phpenmod imagick
 RUN php -r '$image = new \Imagick();$image->newImage(1, 1, new \ImagickPixel("red"));$image->writeImage("avif:test.avif");'
 
