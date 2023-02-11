@@ -1,7 +1,7 @@
 # Build Packages
 FROM --platform=linux/amd64 ubuntu:jammy as builder
 
-RUN export DEBIAN_FRONTEND=noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # Create binaries folder
 RUN mkdir binaries
@@ -118,6 +118,7 @@ WORKDIR /
 # Test package install
 FROM --platform=linux/amd64 ubuntu:jammy as tester
 COPY --from=builder binaries binaries
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
 RUN apt install ./binaries/libde265_*.deb
 RUN apt install -y ./binaries/libheif_*.deb
@@ -127,7 +128,7 @@ RUN ldconfig
 # Test with php imagick extension
 RUN apt-get install -y software-properties-common
 RUN LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php && apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install php8.2 php-pear php-dev
+RUN apt-get -y install php8.2 php-pear php-dev
 RUN printf "\n" | pecl upgrade imagick
 RUN /bin/bash -c "echo extension=imagick.so > /etc/php/8.2/mods-available/imagick.ini"
 RUN phpenmod imagick
