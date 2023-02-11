@@ -67,8 +67,13 @@ RUN mv libheif_*.deb ../binaries/
 RUN pkg-config --exists --print-errors "libheif = $LIBHEIF_VERSION"
 WORKDIR /
 
-# Build ImageMagick from source
+# Set and validate ImageMagick epoch
 ENV IMAGEMAGICK_EPOCH="8:"
+SHELL ["/bin/bash", "-c"]
+RUN [[ $(apt-cache show imagemagick | grep Version) =~ $IMAGEMAGICK_EPOCH ]]
+SHELL ["/bin/sh", "-c"]
+
+# Build ImageMagick from source
 ENV IMAGEMAGICK_VERSION="7.1.0-61"
 RUN git clone --depth 1 --branch $IMAGEMAGICK_VERSION https://github.com/ImageMagick/ImageMagick.git imagemagick
 WORKDIR imagemagick
