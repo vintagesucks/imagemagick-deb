@@ -50,7 +50,7 @@ RUN ./configure
 RUN make
 RUN checkinstall --pkgversion="$LIBDE265_VERSION"
 RUN mv libde265_*.deb ../binaries/
-RUN pkg-config --exists --print-errors "libde265 >= $LIBDE265_VERSION"
+RUN pkg-config --exists --print-errors "libde265 = $LIBDE265_VERSION"
 WORKDIR /
 
 # Build libheif from source
@@ -64,7 +64,7 @@ RUN checkinstall \
   --pkgversion="$LIBHEIF_VERSION" \
   --requires=$(echo "$LIBHEIF_DEPENDENCIES" | tr -s '[:blank:]' ',')
 RUN mv libheif_*.deb ../binaries/
-RUN pkg-config --exists --print-errors "libheif >= $LIBHEIF_VERSION"
+RUN pkg-config --exists --print-errors "libheif = $LIBHEIF_VERSION"
 WORKDIR /
 
 # Build ImageMagick from source
@@ -102,6 +102,9 @@ RUN checkinstall \
   --requires=$(echo "$IMAGEMAGICK_DEPENDENCIES" | tr -s '[:blank:]' ',')
 RUN ldconfig
 RUN mv imagemagick_*.deb ../binaries/
+SHELL ["/bin/bash", "-c"]
+RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) == $IMAGEMAGICK_EPOCH$IMAGEMAGICK_VERSION ]]
+SHELL ["/bin/sh", "-c"]
 WORKDIR /
 
 # Prefix binaries with Ubuntu codename
