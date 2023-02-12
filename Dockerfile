@@ -120,19 +120,39 @@ COPY --from=builder binaries binaries
 SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update
+# Preinstall ImageMagick and imagick php extension
+RUN apt-get update && apt-get install -y software-properties-common
+RUN LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php
+RUN apt-get update && apt-get install -y php8.2 php-pear php-dev imagemagick libmagickwand-dev
+RUN curl -o imagick.tgz https://pecl.php.net/get/imagick
+RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl install ./imagick.tgz
+RUN echo extension=imagick.so > /etc/php/8.2/mods-available/imagick.ini
+RUN phpenmod imagick
+
+# Installed ImageMagick version should not match built ImageMagick version
+RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) != $(dpkg-deb -f ./binaries/imagemagick_*.deb Version) ]]
+
+# ImageMagick version imagick was compiled with and is using should match installed ImageMagick version
+RUN [[ $(php -i | grep "Imagick compiled with ImageMagick version") =~ $(identify --version | sed "-e s/Version: ImageMagick //" -e "s/ .*//" | head -1) ]]
+RUN [[ $(php -i | grep "Imagick using ImageMagick library version") =~ $(identify --version | sed "-e s/Version: ImageMagick //" -e "s/ .*//" | head -1) ]]
+
+# Install built versions
 RUN apt install ./binaries/libde265_*.deb
 RUN apt install -y ./binaries/libheif_*.deb
 RUN apt install -y ./binaries/imagemagick_*.deb
 RUN ldconfig
 
-# Test with php imagick extension
-RUN apt-get install -y software-properties-common
-RUN LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php && apt-get update
-RUN apt-get -y install php8.2 php-pear php-dev
-RUN printf "\n" | pecl upgrade imagick
-RUN echo extension=imagick.so > /etc/php/8.2/mods-available/imagick.ini
-RUN phpenmod imagick
+# Installed ImageMagick version should match built ImageMagick version
+RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) == $(dpkg-deb -f ./binaries/imagemagick_*.deb Version) ]]
+
+# Upgrade imagick php extension
+RUN printf "\n" | pecl upgrade --force ./imagick.tgz
+
+# ImageMagick version imagick was compiled with and is using should match built ImageMagick version
+RUN [[ $(php -i | grep "Imagick compiled with ImageMagick version") =~ $(dpkg-deb -f ./binaries/imagemagick_*.deb Version | cut -d: -f2) ]]
+RUN [[ $(php -i | grep "Imagick using ImageMagick library version") =~ $(dpkg-deb -f ./binaries/imagemagick_*.deb Version | cut -d: -f2) ]]
+
+# Test imagick php extension by creating an avif image
 RUN php -r '$image = new \Imagick();$image->newImage(1, 1, new \ImagickPixel("red"));$image->writeImage("avif:test.avif");'
 
 # Export packages
