@@ -144,8 +144,19 @@ RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) != $(dpkg-deb -f ./binaries/
 RUN [[ $(php -i | grep "Imagick compiled with ImageMagick version") =~ $(identify --version | sed "-e s/Version: ImageMagick //" -e "s/ .*//" | head -1) ]]
 RUN [[ $(php -i | grep "Imagick using ImageMagick library version") =~ $(identify --version | sed "-e s/Version: ImageMagick //" -e "s/ .*//" | head -1) ]]
 
-# Install built versions
+# Test that imagemagick cannot be installed without libde265 and libheif
+RUN apt install -y ./binaries/imagemagick_*.deb && echo "unexpected installation success" && exit 1 || exit 0
+
+# Test that libheif cannot be installed without libde265
+RUN apt install -y ./binaries/libheif_*.deb && echo "unexpected installation success" && exit 1 || exit 0
+
+# Install built libde265
 RUN apt install ./binaries/libde265_*.deb
+
+# Test that imagemagick cannot be installed without libheif, even with libde265 installed
+RUN apt install ./binaries/imagemagick_*.deb && echo "unexpected installation success" && exit 1 || exit 0
+
+# Install built libheif and imagemagick
 RUN apt install -y ./binaries/libheif_*.deb
 RUN apt install -y ./binaries/imagemagick_*.deb
 RUN ldconfig
