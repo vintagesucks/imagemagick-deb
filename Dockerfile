@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN mkdir binaries
 
 # Install build dependencies
-RUN apt-get update && apt-get -y install \
+RUN apt update && apt -y install \
   autoconf \
   build-essential \
   checkinstall \
@@ -19,27 +19,35 @@ RUN apt-get update && apt-get -y install \
   wget
 
 # Install libheif dependencies
-ENV LIBHEIF_DEPENDENCIES="libx265-dev libaom-dev"
-RUN apt-get -y install $LIBHEIF_DEPENDENCIES
+ENV LIBHEIF_DEPENDENCIES='\
+  libx265-dev,\
+  libaom-dev\
+'
+RUN apt satisfy -y "$LIBHEIF_DEPENDENCIES"
 
 # Install ImageMagick dependencies
-ENV IMAGEMAGICK_DEPENDENCIES="libbz2-dev libfontconfig1-dev libfreetype-dev libgs-dev liblcms2-dev liblzma-dev libopenexr-dev libopenjp2-7-dev libjpeg-turbo8-dev libpng-dev liblqr-1-0-dev libglib2.0-dev libraw-dev libtiff-dev libwebp-dev libxml2-dev libx11-dev zlib1g libltdl7"
-RUN apt-get -y install $IMAGEMAGICK_DEPENDENCIES
-RUN pkg-config --exists --print-errors "fontconfig >= 2.1.0"
-RUN pkg-config --exists --print-errors "freetype2 >= 2.8.0"
-RUN pkg-config --exists --print-errors "lcms2 >= 2.0.0"
-RUN pkg-config --exists --print-errors "liblzma >= 2.9.0"
-RUN pkg-config --exists --print-errors "libopenjp2 >= 2.1.0"
-RUN pkg-config --exists --print-errors "libpng >= 1.0.0"
-RUN pkg-config --exists --print-errors "libtiff-4 >= 4.0.0"
-RUN pkg-config --exists --print-errors "libraw_r >= 0.14.8"
-RUN pkg-config --exists --print-errors "libwebp >= 0.6.1"
-RUN pkg-config --exists --print-errors "libwebpdemux >= 0.5.0"
-RUN pkg-config --exists --print-errors "libwebpmux >= 0.5.0"
-RUN pkg-config --exists --print-errors "libxml-2.0 >= 2.0.0"
-RUN pkg-config --exists --print-errors "lqr-1 >= 0.1.0"
-RUN pkg-config --exists --print-errors "OpenEXR >= 1.0.6"
-RUN pkg-config --exists --print-errors "zlib >= 1.0.0"
+ENV IMAGEMAGICK_DEPENDENCIES='\
+  libbz2-dev,\
+  libfontconfig1-dev (>= 2.1.0),\
+  libfreetype-dev (>= 2.8.0),\
+  libgs-dev,\
+  liblcms2-dev (>= 2.0.0),\
+  liblzma-dev (>= 2.9.0),\
+  libopenexr-dev (>= 1.0.6),\
+  libopenjp2-7-dev (>= 2.1.0),\
+  libjpeg-turbo8-dev,\
+  libpng-dev (>= 1.0.0),\
+  liblqr-1-0-dev (>= 0.1.0),\
+  libglib2.0-dev,\
+  libraw-dev (>= 0.14.8),\
+  libtiff-dev (>= 4.0.0),\
+  libwebp-dev (>= 0.6.1),\
+  libxml2-dev (>= 2.0.0),\
+  libx11-dev,\
+  zlib1g (>= 1.0.0),\
+  libltdl7\
+'
+RUN apt satisfy -y "$IMAGEMAGICK_DEPENDENCIES"
 
 # Build libde265 from source
 ENV LIBDE265_VERSION="1.0.11"
@@ -62,7 +70,7 @@ RUN ./configure
 RUN make -j$(nproc)
 RUN checkinstall \
   --pkgversion="$LIBHEIF_VERSION" \
-  --requires=$(echo "$LIBHEIF_DEPENDENCIES" | tr -s '[:blank:]' ',')
+  --requires="'$LIBHEIF_DEPENDENCIES, libde265 (>= $LIBDE265_VERSION)'"
 RUN mv libheif_*.deb ../binaries/
 RUN pkg-config --exists --print-errors "libheif = $LIBHEIF_VERSION"
 WORKDIR /
@@ -102,13 +110,13 @@ RUN make -j$(nproc)
 RUN checkinstall \
   --pkgversion=$IMAGEMAGICK_EPOCH$(echo "$IMAGEMAGICK_VERSION" | cut -d- -f1) \
   --pkgrelease=$(echo "$IMAGEMAGICK_VERSION" | cut -d- -f2) \
-  --requires=$(echo "$IMAGEMAGICK_DEPENDENCIES" | tr -s '[:blank:]' ',')
+  --requires="'$IMAGEMAGICK_DEPENDENCIES, libde265 (>= $LIBDE265_VERSION), libheif (>= $LIBHEIF_VERSION)'"
 RUN ldconfig
 RUN mv imagemagick_*.deb ../binaries/
 RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) == $IMAGEMAGICK_EPOCH$IMAGEMAGICK_VERSION ]]
 WORKDIR /
 
-# Prefix binaries with Ubuntu codename
+# Add Ubuntu codename to the filenames
 WORKDIR binaries
 RUN CODENAME=$( . /etc/os-release ; echo $UBUNTU_CODENAME) && \
   for f in * ; do mv -i -- "$f" "${f//_amd64/~${CODENAME}_amd64}" ; done
@@ -121,9 +129,9 @@ SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Preinstall ImageMagick and imagick php extension
-RUN apt-get update && apt-get install -y software-properties-common
+RUN apt update && apt install -y software-properties-common
 RUN LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php
-RUN apt-get update && apt-get install -y php8.2 php-pear php-dev imagemagick libmagickwand-dev
+RUN apt update && apt install -y php8.2 php-pear php-dev imagemagick libmagickwand-dev
 RUN curl -o imagick.tgz https://pecl.php.net/get/imagick
 RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl install ./imagick.tgz
 RUN echo extension=imagick.so > /etc/php/8.2/mods-available/imagick.ini
@@ -136,8 +144,19 @@ RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) != $(dpkg-deb -f ./binaries/
 RUN [[ $(php -i | grep "Imagick compiled with ImageMagick version") =~ $(identify --version | sed "-e s/Version: ImageMagick //" -e "s/ .*//" | head -1) ]]
 RUN [[ $(php -i | grep "Imagick using ImageMagick library version") =~ $(identify --version | sed "-e s/Version: ImageMagick //" -e "s/ .*//" | head -1) ]]
 
-# Install built versions
+# Test that imagemagick cannot be installed without libde265 and libheif
+RUN apt install -y ./binaries/imagemagick_*.deb && echo "unexpected installation success" && exit 1 || exit 0
+
+# Test that libheif cannot be installed without libde265
+RUN apt install -y ./binaries/libheif_*.deb && echo "unexpected installation success" && exit 1 || exit 0
+
+# Install built libde265
 RUN apt install ./binaries/libde265_*.deb
+
+# Test that imagemagick cannot be installed without libheif, even with libde265 installed
+RUN apt install ./binaries/imagemagick_*.deb && echo "unexpected installation success" && exit 1 || exit 0
+
+# Install built libheif and imagemagick
 RUN apt install -y ./binaries/libheif_*.deb
 RUN apt install -y ./binaries/imagemagick_*.deb
 RUN ldconfig
