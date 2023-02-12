@@ -154,7 +154,7 @@ RUN apt install -y ./binaries/libheif_*.deb && echo "unexpected installation suc
 RUN apt install ./binaries/libde265_*.deb
 
 # Test that imagemagick cannot be installed without libheif, even with libde265 installed
-RUN apt install ./binaries/imagemagick_*.deb && echo "unexpected installation success" && exit 1 || exit 0
+RUN apt install -y ./binaries/imagemagick_*.deb && echo "unexpected installation success" && exit 1 || exit 0
 
 # Install built libheif and imagemagick
 RUN apt install -y ./binaries/libheif_*.deb
