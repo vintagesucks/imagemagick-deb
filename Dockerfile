@@ -125,7 +125,7 @@ RUN apt-get update && apt-get install -y software-properties-common
 RUN LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php
 RUN apt-get update && apt-get install -y php8.2 php-pear php-dev imagemagick libmagickwand-dev
 RUN curl -o imagick.tgz https://pecl.php.net/get/imagick
-RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl install ./imagick.tgz
+RUN printf "\n" | pecl install ./imagick.tgz
 RUN echo extension=imagick.so > /etc/php/8.2/mods-available/imagick.ini
 RUN phpenmod imagick
 
