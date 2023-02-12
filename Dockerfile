@@ -164,6 +164,14 @@ RUN ldconfig
 # Installed ImageMagick version should match built ImageMagick version
 RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) == $(dpkg-deb -f ./binaries/imagemagick_*.deb Version) ]]
 
+# Check feature and delegate support
+RUN for feature in Modules freetype heic jpeg png raw tiff ; do [[ $(magick -version) =~ $feature ]] ; done 
+
+# Check image format support
+RUN [[ $(magick -list format) =~ "ARW  DNG       r--" ]]
+RUN [[ $(magick -list format) =~ "DNG  DNG       r--" ]]
+RUN [[ $(magick -list format) =~ "AVIF  HEIC      rw+" ]]
+
 # Upgrade imagick php extension
 RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl upgrade --force ./imagick.tgz
 
