@@ -20,32 +20,33 @@ RUN apt update && apt -y install \
 
 # Install libheif dependencies
 ENV LIBHEIF_DEPENDENCIES='\
-  libx265-dev,\
-  libaom-dev\
+  libaom-dev,\
+  libx265-dev\
 '
 RUN apt satisfy -y "$LIBHEIF_DEPENDENCIES"
 
 # Install ImageMagick dependencies
 ENV IMAGEMAGICK_DEPENDENCIES='\
+  gsfonts,\
   libbz2-dev,\
   libfontconfig1-dev (>= 2.1.0),\
   libfreetype-dev (>= 2.8.0),\
+  libglib2.0-dev,\
   libgs-dev,\
+  libjpeg-turbo8-dev,\
   liblcms2-dev (>= 2.0.0),\
+  liblqr-1-0-dev (>= 0.1.0),\
+  libltdl7,\
   liblzma-dev (>= 2.9.0),\
   libopenexr-dev (>= 1.0.6),\
   libopenjp2-7-dev (>= 2.1.0),\
-  libjpeg-turbo8-dev,\
   libpng-dev (>= 1.0.0),\
-  liblqr-1-0-dev (>= 0.1.0),\
-  libglib2.0-dev,\
   libraw-dev (>= 0.14.8),\
   libtiff-dev (>= 4.0.0),\
   libwebp-dev (>= 0.6.1),\
-  libxml2-dev (>= 2.0.0),\
   libx11-dev,\
-  zlib1g (>= 1.0.0),\
-  libltdl7\
+  libxml2-dev (>= 2.0.0),\
+  zlib1g (>= 1.0.0)\
 '
 RUN apt satisfy -y "$IMAGEMAGICK_DEPENDENCIES"
 
@@ -86,16 +87,16 @@ WORKDIR imagemagick
 RUN ./configure \
   --disable-opencl \
   --disable-silent-rules \
-  --enable-shared \
   --enable-openmp \
+  --enable-shared \
   --enable-static \
   --with-bzlib=yes \
   --with-fontconfig=yes \
   --with-freetype=yes \
   --with-gslib=yes \
-  --with-lqr=yes \
   --with-gvc=no \
   --with-heic=yes \
+  --with-lqr=yes \
   --with-modules \
   --with-openexr=yes \
   --with-openjp2 \
@@ -171,6 +172,9 @@ RUN for feature in Modules freetype heic jpeg png raw tiff ; do [[ $(magick -ver
 RUN [[ $(magick -list format) =~ "ARW  DNG       r--" ]]
 RUN [[ $(magick -list format) =~ "DNG  DNG       r--" ]]
 RUN [[ $(magick -list format) =~ "AVIF  HEIC      rw+" ]]
+
+# Check font support
+RUN [[ $(magick -list font) =~ "Helvetica" ]]
 
 # Upgrade imagick php extension
 RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl upgrade --force ./imagick.tgz
