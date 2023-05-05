@@ -58,7 +58,7 @@ $ magick -list format
       ARW  DNG       r--   Sony Alpha Raw Image Format (0.20.2-Release)
    ASHLAR* ASHLAR    -w+   Image sequence laid out in continuous irregular courses
       AVI  VIDEO     r--   Microsoft Audio/Visual Interleaved
-     AVIF  HEIC      rw+   AV1 Image File Format (1.15.2)
+     AVIF  HEIC      rw+   AV1 Image File Format (1.16.1)
       AVS* AVS       rw+   AVS X image
     BAYER* BAYER     rw+   Raw mosaiced samples
    BAYERA* BAYER     rw+   Raw mosaiced and alpha samples
@@ -146,8 +146,8 @@ $ magick -list format
        GV  DOT       ---   Graphviz
      HALD* HALD      r--   Identity Hald color lookup table image
       HDR* HDR       rw+   Radiance RGBE image format
-     HEIC  HEIC      rw+   High Efficiency Image Format (1.15.2)
-     HEIF  HEIC      rw+   High Efficiency Image Format (1.15.2)
+     HEIC  HEIC      rw+   High Efficiency Image Format (1.16.1)
+     HEIF  HEIC      rw+   High Efficiency Image Format (1.16.1)
 HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       HRZ* HRZ       rw-   Slow Scan TeleVision
       HTM* HTML      -w-   Hypertext Markup Language and a client-side image map

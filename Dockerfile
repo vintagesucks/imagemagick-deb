@@ -11,6 +11,7 @@ RUN apt update && apt -y install \
   autoconf \
   build-essential \
   checkinstall \
+  cmake \
   curl \
   git \
   libtool \
@@ -63,16 +64,17 @@ RUN pkg-config --exists --print-errors "libde265 = $LIBDE265_VERSION"
 WORKDIR /
 
 # Build libheif from source
-ENV LIBHEIF_VERSION="1.15.2"
+ENV LIBHEIF_VERSION="1.16.1"
 RUN git clone --depth 1 --branch v$LIBHEIF_VERSION https://github.com/strukturag/libheif.git
 WORKDIR libheif
-RUN ./autogen.sh
-RUN ./configure
+WORKDIR build
+RUN cmake --preset=release ..
 RUN make -j$(nproc)
 RUN checkinstall \
+  --pkgname="libheif" \
   --pkgversion="$LIBHEIF_VERSION" \
   --requires="'$LIBHEIF_DEPENDENCIES, libde265 (>= $LIBDE265_VERSION)'"
-RUN mv libheif_*.deb ../binaries/
+RUN mv libheif_*.deb ../../binaries/
 RUN pkg-config --exists --print-errors "libheif = $LIBHEIF_VERSION"
 WORKDIR /
 
