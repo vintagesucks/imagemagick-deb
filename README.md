@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.1-10 Q16-HDRI x86_64 3b5d98645:20230520 https://imagemagick.org
+Version: ImageMagick 7.1.1-11 Q16-HDRI x86_64 f04a7eb33:20230528 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -71,9 +71,9 @@ $ magick -list format
      BMP3* BMP       rw-   Microsoft Windows bitmap image (V3)
       BRF* BRAILLE   -w-   BRF ASCII Braille format
       CAL* CALS      rw-   Continuous Acquisition and Life-cycle Support Type 1
-           Specified in MIL-R-28002 and MIL-PRF-28002
+             Specified in MIL-R-28002 and MIL-PRF-28002
      CALS* CALS      rw-   Continuous Acquisition and Life-cycle Support Type 1
-           Specified in MIL-R-28002 and MIL-PRF-28002
+             Specified in MIL-R-28002 and MIL-PRF-28002
    CANVAS* XC        r--   Constant image uniform color
   CAPTION* CAPTION   r--   Caption
       CIN* CIN       rw-   Cineon Image File
@@ -89,11 +89,11 @@ $ magick -list format
       CUT* CUT       r--   DR Halo
      DATA* INLINE    rw+   Base64-encoded inline images
       DCM* DCM       r--   Digital Imaging and Communications in Medicine image
-           DICOM is used by the medical community for images like X-rays.  The
-           specification, "Digital Imaging and Communications in Medicine
-           (DICOM)", is available at http://medical.nema.org/.  In particular,
-           see part 5 which describes the image encoding (RLE, JPEG, JPEG-LS),
-           and supplement 61 which adds JPEG-2000 encoding.
+             DICOM is used by the medical community for images like X-rays.  The
+             specification, "Digital Imaging and Communications in Medicine
+             (DICOM)", is available at http://medical.nema.org/.  In particular,
+             see part 5 which describes the image encoding (RLE, JPEG, JPEG-LS),
+             and supplement 61 which adds JPEG-2000 encoding.
       DCR  DNG       r--   Kodak Digital Camera Raw Image File (0.20.2-Release)
     DCRAW  DNG       r--   Raw Photo Decoder (dcraw) (0.20.2-Release)
       DCX* PCX       rw+   ZSoft IBM PC multi-page Paintbrush
@@ -102,9 +102,9 @@ $ magick -list format
       DNG  DNG       r--   Digital Negative (0.20.2-Release)
       DOT  DOT       ---   Graphviz
       DPX* DPX       rw-   SMPTE 268M-2003 (DPX 2.0)
-           Digital Moving Picture Exchange Bitmap, Version 2.0.
-           See SMPTE 268M-2003 specification at http://www.smtpe.org
-           
+             Digital Moving Picture Exchange Bitmap, Version 2.0.
+             See SMPTE 268M-2003 specification at http://www.smtpe.org
+             
      DXT1* DDS       rw+   Microsoft DirectDraw Surface
      DXT5* DDS       rw+   Microsoft DirectDraw Surface
      EPDF  PDF       rw-   Encapsulated Portable Document Format
@@ -121,11 +121,11 @@ $ magick -list format
       EXR  EXR       rw-   High Dynamic-range (HDR) (OpenEXR 2.5.7)
  FARBFELD* FARBFELD  rw-   Farbfeld
       FAX* FAX       rw+   Group 3 FAX
-           FAX machines use non-square pixels which are 1.5 times wider than
-           they are tall but computer displays use square pixels, therefore
-           FAX images may appear to be narrow unless they are explicitly
-           resized using a geometry of "150x100%".
-           
+             FAX machines use non-square pixels which are 1.5 times wider than
+             they are tall but computer displays use square pixels, therefore
+             FAX images may appear to be narrow unless they are explicitly
+             resized using a geometry of "150x100%".
+             
        FF* FARBFELD  rw-   Farbfeld
      FILE* URL       r--   Uniform Resource Locator (file://)
      FITS* FITS      rw+   Flexible Image Transport System
@@ -143,6 +143,7 @@ $ magick -list format
      GRAY* GRAY      rw+   Raw gray samples
     GRAYA* GRAY      rw+   Raw gray and alpha samples
    GROUP4* TIFF      rw-   Raw CCITT Group4
+             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
        GV  DOT       ---   Graphviz
      HALD* HALD      r--   Identity Hald color lookup table image
       HDR* HDR       rw+   Radiance RGBE image format
@@ -168,8 +169,8 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       JBG* JBIG      rw+   Joint Bi-level Image experts Group interchange format (2.1)
      JBIG* JBIG      rw+   Joint Bi-level Image experts Group interchange format (2.1)
       JNG* PNG       rw-   JPEG Network Graphics
-           See http://www.libpng.org/pub/mng/ for details about the JNG
-           format.
+             See http://www.libpng.org/pub/mng/ for details about the JNG
+             format.
       JNX* JNX       r--   Garmin tile format
       JP2* JP2       rw-   JPEG-2000 File Format Syntax (2.4.0)
       JPC* JP2       rw-   JPEG-2000 Code Stream Syntax (2.4.0)
@@ -195,8 +196,8 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
      MIFF* MIFF      rw+   Magick Image File Format
       MKV  VIDEO     rw+   Multimedia Container
       MNG* PNG       rw+   Multiple-image Network Graphics (libpng 1.6.37)
-           See http://www.libpng.org/pub/mng/ for details about the MNG
-           format.
+             See http://www.libpng.org/pub/mng/ for details about the MNG
+             format.
      MONO* MONO      rw-   Raw bi-level bitmap
       MOV  VIDEO     rw+   MPEG Video Stream
       MP4  VIDEO     rw+   VIDEO-4 Video Stream
@@ -243,7 +244,7 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
     PJPEG* JPEG      rw-   Joint Photographic Experts Group JFIF format (libjpeg-turbo 2.1.2)
    PLASMA* PLASMA    r--   Plasma fractal image
       PNG* PNG       rw-   Portable Network Graphics (libpng 1.6.37)
-           See http://www.libpng.org/ for details about the PNG format.
+             See http://www.libpng.org/ for details about the PNG format.
     PNG00* PNG       rw-   PNG inheriting bit-depth, color-type from original, if possible
     PNG24* PNG       rw-   opaque or binary transparent 24-bit RGB
     PNG32* PNG       rw-   opaque or transparent 32-bit RGBA
@@ -259,6 +260,7 @@ POCKETMOD  PDF       rw+   Pocketmod Personal Organizer
       PSB* PSD       rw+   Adobe Large Document Format
       PSD* PSD       rw+   Adobe Photoshop bitmap
      PTIF* TIFF      rw+   Pyramid encoded TIFF
+             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
       PWP* PWP       r--   Seattle Film Works
       QOI* QOI       rw-   Quite OK image format
 RADIAL-GRADIENT* GRADIENT  r--   Gradual radial passing from one shade to another
@@ -293,7 +295,9 @@ SPARSE-COLOR* TXT       -w+   Sparse Color
       TGA* TGA       rw-   Truevision Targa image
 THUMBNAIL* THUMBNAIL -w+   EXIF Profile Thumbnail
      TIFF* TIFF      rw+   Tagged Image File Format (LIBTIFF, Version 4.3.0)
+             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
    TIFF64* TIFF      rw+   Tagged Image File Format (64-bit) (LIBTIFF, Version 4.3.0)
+             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
      TILE* TILE      r--   Tile image with a texture
       TIM* TIM       r--   PSX TIM
       TM2* TIM2      r--   PS2 TIM2
