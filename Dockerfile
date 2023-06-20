@@ -52,7 +52,7 @@ ENV IMAGEMAGICK_DEPENDENCIES='\
 RUN apt satisfy -y "$IMAGEMAGICK_DEPENDENCIES"
 
 # Build libde265 from source
-ENV LIBDE265_VERSION="1.0.11"
+ENV LIBDE265_VERSION="1.0.12"
 RUN git clone --depth 1 --branch v$LIBDE265_VERSION https://github.com/strukturag/libde265.git
 WORKDIR libde265
 RUN ./autogen.sh
