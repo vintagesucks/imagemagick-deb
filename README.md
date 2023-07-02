@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.1-11 Q16-HDRI x86_64 f04a7eb33:20230528 https://imagemagick.org
+Version: ImageMagick 7.1.1-12 Q16-HDRI x86_64 b3f8ed7a7:20230625 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -204,6 +204,7 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       MPC* MPC       rw+   Magick Pixel Cache image format
      MPEG  VIDEO     rw+   MPEG Video Stream
       MPG  VIDEO     rw+   MPEG Video Stream
+      MPO* JPEG      r--   Joint Photographic Experts Group JFIF format (libjpeg-turbo 2.1.2)
       MRW  DNG       r--   Sony (Minolta) Raw Image File (0.20.2-Release)
       MSL* MSL       rw+   Magick Scripting Language
      MSVG* SVG       rw+   ImageMagick's own SVG internal renderer
