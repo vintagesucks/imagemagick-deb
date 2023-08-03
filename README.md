@@ -38,12 +38,12 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.1-14 Q16-HDRI x86_64 e284d8387:20230722 https://imagemagick.org
+Version: ImageMagick 7.1.1-15 Q16-HDRI x86_64 98eceff6a:20230729 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
 Delegates (built-in): bzlib fontconfig freetype gslib heic jbig jng jp2 jpeg lcms lqr ltdl lzma openexr png ps raw tiff webp x xml zlib
-Compiler: gcc (11.3)
+Compiler: gcc (11.4)
 
 $ magick -list format
    Format  Module    Mode  Description
