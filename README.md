@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.1-15 Q16-HDRI x86_64 98eceff6a:20230729 https://imagemagick.org
+Version: ImageMagick 7.1.1-16 Q16-HDRI x86_64 b9b52c9ea:20230917 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -143,7 +143,7 @@ $ magick -list format
      GRAY* GRAY      rw+   Raw gray samples
     GRAYA* GRAY      rw+   Raw gray and alpha samples
    GROUP4* TIFF      rw-   Raw CCITT Group4
-             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
+             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LERC, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
        GV  DOT       ---   Graphviz
      HALD* HALD      r--   Identity Hald color lookup table image
       HDR* HDR       rw+   Radiance RGBE image format
@@ -261,7 +261,7 @@ POCKETMOD  PDF       rw+   Pocketmod Personal Organizer
       PSB* PSD       rw+   Adobe Large Document Format
       PSD* PSD       rw+   Adobe Photoshop bitmap
      PTIF* TIFF      rw+   Pyramid encoded TIFF
-             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
+             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LERC, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
       PWP* PWP       r--   Seattle Film Works
       QOI* QOI       rw-   Quite OK image format
 RADIAL-GRADIENT* GRADIENT  r--   Gradual radial passing from one shade to another
@@ -296,9 +296,9 @@ SPARSE-COLOR* TXT       -w+   Sparse Color
       TGA* TGA       rw-   Truevision Targa image
 THUMBNAIL* THUMBNAIL -w+   EXIF Profile Thumbnail
      TIFF* TIFF      rw+   Tagged Image File Format (LIBTIFF, Version 4.3.0)
-             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
+             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LERC, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
    TIFF64* TIFF      rw+   Tagged Image File Format (64-bit) (LIBTIFF, Version 4.3.0)
-             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
+             Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LERC, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
      TILE* TILE      r--   Tile image with a texture
       TIM* TIM       r--   PSX TIM
       TM2* TIM2      r--   PS2 TIM2
