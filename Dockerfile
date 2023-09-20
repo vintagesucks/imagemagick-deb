@@ -83,7 +83,7 @@ ENV IMAGEMAGICK_EPOCH="8:"
 RUN [[ $(apt-cache show imagemagick | grep Version) =~ $IMAGEMAGICK_EPOCH ]]
 
 # Build ImageMagick from source
-ENV IMAGEMAGICK_VERSION="7.1.1-16"
+ENV IMAGEMAGICK_VERSION="7.1.1-17"
 RUN git clone --depth 1 --branch $IMAGEMAGICK_VERSION https://github.com/ImageMagick/ImageMagick.git imagemagick
 WORKDIR imagemagick
 RUN ./configure \
