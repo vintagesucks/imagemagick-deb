@@ -30,3 +30,4 @@ jobs:
             commit-message: 'Bump libheif to ${{steps.version.outputs.prop}}'
             body: 'https://github.com/strukturag/libheif/releases/tag/${{steps.version.outputs.prop}}'
             delete-branch: true
+            token: ${{ secrets.PAT }}

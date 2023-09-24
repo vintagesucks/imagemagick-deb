@@ -30,3 +30,4 @@ jobs:
             commit-message: 'Bump libde265 to ${{steps.version.outputs.prop}}'
             body: 'https://github.com/strukturag/libde265/releases/tag/${{steps.version.outputs.prop}}'
             delete-branch: true
+            token: ${{ secrets.PAT }}
