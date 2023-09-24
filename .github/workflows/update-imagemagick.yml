@@ -29,3 +29,4 @@ jobs:
             commit-message: 'Bump ImageMagick to ${{steps.version.outputs.prop}}'
             body: 'https://github.com/ImageMagick/ImageMagick/releases/tag/${{steps.version.outputs.prop}}'
             delete-branch: true
+            token: ${{ secrets.PAT }}
