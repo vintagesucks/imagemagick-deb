@@ -4,7 +4,7 @@
 [ImageMagick](https://imagemagick.org/) packaging for Ubuntu 22.04 (amd64) built with [CheckInstall](https://asic-linux.com.mx/~izto/checkinstall/).
 
 Goals:
-* [x] Functionality on par with the [ImageMagick Homebrew Formula](https://github.com/Homebrew/homebrew-core/blob/master/Formula/imagemagick.rb)
+* [x] Functionality on par with the [ImageMagick Homebrew Formula](https://github.com/Homebrew/homebrew-core/blob/master/Formula/i/imagemagick.rb)
 * [x] Compatibility with the [Imagick php extension](https://pecl.php.net/package/imagick) (PECL)
 
 > **Warning**  
