@@ -131,27 +131,14 @@ COPY --from=builder binaries binaries
 SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Preinstall ImageMagick, PHP and imagick php extension
+# Preinstall ImageMagick and imagick php extension
 RUN apt update && apt install -y software-properties-common
 RUN LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php
-RUN apt update && apt install -y \
-  imagemagick \
-  libmagickwand-dev \
-  php-pear \
-  php8.3 \
-  php8.3-cli \
-  php8.3-common \
-  php8.3-dev \
-  php8.3-opcache \
-  php8.3-readline \
-  php8.3-xml
+RUN apt update && apt install -y php8.2 php-pear php-dev imagemagick libmagickwand-dev
 RUN curl -o imagick.tgz https://pecl.php.net/get/imagick
 RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl install ./imagick.tgz
-RUN echo extension=imagick.so > /etc/php/8.3/mods-available/imagick.ini
+RUN echo extension=imagick.so > /etc/php/8.2/mods-available/imagick.ini
 RUN phpenmod imagick
-
-# Installed PHP version should be as expected
-RUN [[ $(php -v) =~ "PHP 8.3" ]]
 
 # Installed ImageMagick version should not match built ImageMagick version
 RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) != $(dpkg-deb -f ./binaries/imagemagick_*.deb Version) ]]
