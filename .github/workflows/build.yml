@@ -39,7 +39,7 @@ jobs:
         run: magick -list format
 
       - name: Archive binary artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: binaries
           path: binaries

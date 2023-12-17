@@ -167,6 +167,9 @@ RUN ldconfig
 # Installed ImageMagick version should match built ImageMagick version
 RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) == $(dpkg-deb -f ./binaries/imagemagick_*.deb Version) ]]
 
+# ImageMagick version string should not contain `(Beta)`
+RUN [[ ! $(magick -version) =~ "(Beta)" ]]
+
 # Check feature and delegate support
 RUN for feature in Modules freetype heic jpeg png raw tiff ; do [[ $(magick -version) =~ $feature ]] ; done 
 
