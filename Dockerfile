@@ -134,7 +134,16 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Preinstall ImageMagick and imagick php extension
 RUN apt update && apt install -y software-properties-common
 RUN LC_ALL=en_US.UTF-8 add-apt-repository -y ppa:ondrej/php
-RUN apt update && apt install -y php8.2 php-pear php-dev imagemagick libmagickwand-dev
+RUN apt update && apt install -y \
+  imagemagick \
+  libmagickwand-dev \
+  php-pear \
+  php8.2 \
+  php8.2-cli \
+  php8.2-common \
+  php8.2-dev \
+  php8.2-xml
+RUN [[ $(php -v) =~ "PHP 8.2" ]]
 RUN curl -o imagick.tgz https://pecl.php.net/get/imagick
 RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl install ./imagick.tgz
 RUN echo extension=imagick.so > /etc/php/8.2/mods-available/imagick.ini
