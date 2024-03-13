@@ -17,7 +17,7 @@ jobs:
     name: "Build"
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.1.2
 
       - name: Build packages
         run: DOCKER_BUILDKIT=1 docker build --tag imagemagick-deb --output binaries .
@@ -53,7 +53,7 @@ jobs:
           wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
           bash ./upload.sh binaries/*
 
-      - uses: actions/checkout@v4.1.1
+      - uses: actions/checkout@v4.1.2
         if: github.event_name == 'pull_request'
         with:
           ref: ${{ github.event.pull_request.head.ref }}
