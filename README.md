@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.1-29 Q16-HDRI x86_64 cfc71f0aa:20240225 https://imagemagick.org
+Version: ImageMagick 7.1.1-30 Q16-HDRI x86_64 babe7ad2f:20240407 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -48,14 +48,14 @@ Compiler: gcc (11.4)
 $ magick -list format
    Format  Module    Mode  Description
 -------------------------------------------------------------------------------
-      3FR  DNG       r--   Hasselblad CFV/H3D39II (0.20.2-Release)
+      3FR  DNG       r--   Hasselblad CFV/H3D39II Raw Format (0.20.2-Release)
       3G2  VIDEO     r--   Media Container
       3GP  VIDEO     r--   Media Container
       AAI* AAI       rw+   AAI Dune image
        AI  PDF       rw-   Adobe Illustrator CS2
      APNG  VIDEO     rw+   Animated Portable Network Graphics
       ART* ART       rw-   PFS: 1st Publisher Clip Art
-      ARW  DNG       r--   Sony Alpha Raw Image Format (0.20.2-Release)
+      ARW  DNG       r--   Sony Alpha Raw Format (0.20.2-Release)
    ASHLAR* ASHLAR    -w+   Image sequence laid out in continuous irregular courses
       AVI  VIDEO     r--   Microsoft Audio/Visual Interleaved
      AVIF  HEIC      rw+   AV1 Image File Format (1.17.6)
@@ -81,9 +81,9 @@ $ magick -list format
      CLIP* CLIP      rw+   Image Clip Mask
      CMYK* CMYK      rw+   Raw cyan, magenta, yellow, and black samples
     CMYKA* CMYK      rw+   Raw cyan, magenta, yellow, black, and alpha samples
-      CR2  DNG       r--   Canon Digital Camera Raw Image Format (0.20.2-Release)
-      CR3  DNG       r--   Canon Digital Camera Raw Image Format (0.20.2-Release)
-      CRW  DNG       r--   Canon Digital Camera Raw Image Format (0.20.2-Release)
+      CR2  DNG       r--   Canon Digital Camera Raw Format (0.20.2-Release)
+      CR3  DNG       r--   Canon Digital Camera Raw Format (0.20.2-Release)
+      CRW  DNG       r--   Canon Digital Camera Raw Format (0.20.2-Release)
      CUBE* CUBE      r--   Cube LUT
       CUR* ICON      rw-   Microsoft icon
       CUT* CUT       r--   DR Halo
@@ -94,12 +94,12 @@ $ magick -list format
              (DICOM)", is available at http://medical.nema.org/.  In particular,
              see part 5 which describes the image encoding (RLE, JPEG, JPEG-LS),
              and supplement 61 which adds JPEG-2000 encoding.
-      DCR  DNG       r--   Kodak Digital Camera Raw Image File (0.20.2-Release)
+      DCR  DNG       r--   Kodak Digital Camera Raw Format (0.20.2-Release)
     DCRAW  DNG       r--   Raw Photo Decoder (dcraw) (0.20.2-Release)
       DCX* PCX       rw+   ZSoft IBM PC multi-page Paintbrush
       DDS* DDS       rw+   Microsoft DirectDraw Surface
     DFONT* TTF       r--   Multi-face font package (Freetype 2.11.1)
-      DNG  DNG       r--   Digital Negative (0.20.2-Release)
+      DNG  DNG       r--   Digital Negative Raw Format (0.20.2-Release)
       DOT  DOT       ---   Graphviz
       DPX* DPX       rw-   SMPTE 268M-2003 (DPX 2.0)
              Digital Moving Picture Exchange Bitmap, Version 2.0.
@@ -117,7 +117,7 @@ $ magick -list format
       EPT  EPT       rw-   Encapsulated PostScript with TIFF preview
      EPT2  EPT       rw-   Encapsulated PostScript Level II with TIFF preview
      EPT3  EPT       rw+   Encapsulated PostScript Level III with TIFF preview
-      ERF  DNG       r--   Epson RAW Format (0.20.2-Release)
+      ERF  DNG       r--   Epson Raw Format (0.20.2-Release)
       EXR  EXR       rw-   High Dynamic-range (HDR) (OpenEXR 2.5.7)
  FARBFELD* FARBFELD  rw-   Farbfeld
       FAX* FAX       rw+   Group 3 FAX
@@ -127,6 +127,7 @@ $ magick -list format
              resized using a geometry of "150x100%".
              
        FF* FARBFELD  rw-   Farbfeld
+      FFF  DNG       r--   Hasselblad CFV/H3D39II Raw Format (0.20.2-Release)
      FILE* URL       r--   Uniform Resource Locator (file://)
      FITS* FITS      rw+   Flexible Image Transport System
      FL32* FL32      rw-   FilmLight
@@ -158,7 +159,7 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       ICB* TGA       rw-   Truevision Targa image
       ICO* ICON      rw+   Microsoft icon
      ICON* ICON      rw-   Microsoft icon
-      IIQ  DNG       r--   Phase One Raw Image Format (0.20.2-Release)
+      IIQ  DNG       r--   Phase One Raw Format (0.20.2-Release)
      INFO  INFO      -w+   The image format and characteristics
    INLINE* INLINE    rw+   Base64-encoded inline images
       IPL* IPL       rw+   IPL Image Sequence
@@ -181,8 +182,8 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       JPS* JPEG      rw-   Joint Photographic Experts Group JFIF format (libjpeg-turbo 2.1.2)
       JPT* JP2       rw-   JPEG-2000 File Format Syntax (2.4.0)
      JSON  JSON      -w+   The image format and characteristics
-      K25  DNG       r--   Kodak Digital Camera Raw Image Format (0.20.2-Release)
-      KDC  DNG       r--   Kodak Digital Camera Raw Image Format (0.20.2-Release)
+      K25  DNG       r--   Kodak Digital Camera Raw Format (0.20.2-Release)
+      KDC  DNG       r--   Kodak Digital Camera Raw Format (0.20.2-Release)
    KERNEL* KERNEL    -w-   Morphology Kernel
     LABEL* LABEL     r--   Image label
       M2V  VIDEO     rw+   MPEG Video Stream
@@ -192,29 +193,31 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
      MASK* MASK      rw+   Image Clip Mask
       MAT  MAT       rw+   MATLAB level 5 image format
     MATTE* MATTE     -w+   MATTE format
-      MEF  DNG       r--   Mamiya Raw Image File (0.20.2-Release)
+      MDC  DNG       r--   Minolta Digital Camera Raw Format (0.20.2-Release)
+      MEF  DNG       r--   Mamiya Raw Format (0.20.2-Release)
      MIFF* MIFF      rw+   Magick Image File Format
       MKV  VIDEO     rw+   Multimedia Container
       MNG* PNG       rw+   Multiple-image Network Graphics (libpng 1.6.37)
              See http://www.libpng.org/pub/mng/ for details about the MNG
              format.
      MONO* MONO      rw-   Raw bi-level bitmap
+      MOS  DNG       r--   Aptus Leaf Raw Format (0.20.2-Release)
       MOV  VIDEO     rw+   MPEG Video Stream
       MP4  VIDEO     rw+   VIDEO-4 Video Stream
       MPC* MPC       rw+   Magick Pixel Cache image format
      MPEG  VIDEO     rw+   MPEG Video Stream
       MPG  VIDEO     rw+   MPEG Video Stream
       MPO* JPEG      r--   Joint Photographic Experts Group JFIF format (libjpeg-turbo 2.1.2)
-      MRW  DNG       r--   Sony (Minolta) Raw Image File (0.20.2-Release)
+      MRW  DNG       r--   Sony (Minolta) Raw Format (0.20.2-Release)
       MSL* MSL       rw+   Magick Scripting Language
      MSVG* SVG       rw+   ImageMagick's own SVG internal renderer
       MTV* MTV       rw+   MTV Raytracing image format
       MVG* MVG       rw-   Magick Vector Graphics
-      NEF  DNG       r--   Nikon Digital SLR Camera Raw Image File (0.20.2-Release)
-      NRW  DNG       r--   Nikon Digital SLR Camera Raw Image File (0.20.2-Release)
+      NEF  DNG       r--   Nikon Digital SLR Camera Raw Format (0.20.2-Release)
+      NRW  DNG       r--   Nikon Digital SLR Camera Raw Format (0.20.2-Release)
      NULL* NULL      rw-   Constant image of uniform color
       ORA  ORA       ---   OpenRaster format
-      ORF  DNG       r--   Olympus Digital Camera Raw Image File (0.20.2-Release)
+      ORF  DNG       r--   Olympus Digital Camera Raw Format (0.20.2-Release)
       OTB* OTB       rw-   On-the-air bitmap
       OTF* TTF       r--   Open Type font (Freetype 2.11.1)
       PAL* UYVY      rw-   16bit/pixel interleaved YUV
@@ -231,7 +234,7 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       PDB* PDB       rw+   Palm Database ImageViewer Format
       PDF  PDF       rw+   Portable Document Format
      PDFA  PDF       rw+   Portable Document Archive Format
-      PEF  DNG       r--   Pentax Electronic File (0.20.2-Release)
+      PEF  DNG       r--   Pentax Electronic Raw Format (0.20.2-Release)
       PES* PES       r--   Embrid Embroidery Format
       PFA* TTF       r--   Postscript Type 1 font (ASCII) (Freetype 2.11.1)
       PFB* TTF       r--   Postscript Type 1 font (binary) (Freetype 2.11.1)
@@ -265,7 +268,7 @@ POCKETMOD  PDF       rw+   Pocketmod Personal Organizer
       PWP* PWP       r--   Seattle Film Works
       QOI* QOI       rw-   Quite OK image format
 RADIAL-GRADIENT* GRADIENT  r--   Gradual radial passing from one shade to another
-      RAF  DNG       r--   Fuji CCD-RAW Graphic File (0.20.2-Release)
+      RAF  DNG       r--   Fuji CCD-RAW Graphic Raw Format (0.20.2-Release)
       RAS* SUN       rw+   SUN Rasterfile
       RAW  DNG       r--   Raw (0.20.2-Release)
       RGB* RGB       rw+   Raw red, green, and blue samples
@@ -276,7 +279,8 @@ RADIAL-GRADIENT* GRADIENT  r--   Gradual radial passing from one shade to anothe
       RLA* RLA       r--   Alias/Wavefront image
       RLE* RLE       r--   Utah Run length encoded image
       RMF  DNG       r--   Raw Media Format (0.20.2-Release)
-      RW2  DNG       r--   Panasonic Lumix Raw Image (0.20.2-Release)
+      RW2  DNG       r--   Panasonic Lumix Raw Format (0.20.2-Release)
+      RWL  DNG       r--   Leica Raw Format (0.20.2-Release)
       SCR* SCR       r--   ZX-Spectrum SCREEN$
       SCT* SCT       r--   Scitex HandShake
       SFW* SFW       r--   Seattle Film Works
@@ -287,7 +291,9 @@ RADIAL-GRADIENT* GRADIENT  r--   Gradual radial passing from one shade to anothe
 SPARSE-COLOR* TXT       -w+   Sparse Color
       SR2  DNG       r--   Sony Raw Format 2 (0.20.2-Release)
       SRF  DNG       r--   Sony Raw Format (0.20.2-Release)
+      SRW  DNG       r--   Samsung Raw Format (0.20.2-Release)
   STEGANO* STEGANO   r--   Steganographic image
+      STI  DNG       r--   Sinar CaptureShop Raw Format (0.20.2-Release)
    STRIMG* STRIMG    rw-   String to image and back
       SUN* SUN       rw+   SUN Rasterfile
       SVG* SVG       rw+   Scalable Vector Graphics (XML 2.9.13)
@@ -321,7 +327,7 @@ THUMBNAIL* THUMBNAIL -w+   EXIF Profile Thumbnail
       WMV  VIDEO     rw+   Windows Media Video
       WPG* WPG       rw-   Word Perfect Graphics
         X* X         rw+   X Image
-      X3F  DNG       r--   Sigma Camera RAW Picture File (0.20.2-Release)
+      X3F  DNG       r--   Sigma Camera RAW Format (0.20.2-Release)
       XBM* XBM       rw-   X Windows system bitmap (black and white)
        XC* XC        r--   Constant image uniform color
       XCF* XCF       r--   GIMP image
