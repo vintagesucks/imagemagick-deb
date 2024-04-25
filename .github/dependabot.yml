@@ -4,6 +4,13 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    open-pull-requests-limit: 2
+    groups:
+      actions-patch:
+        patterns:
+        - "*"
+        update-types:
+        - "patch"
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
