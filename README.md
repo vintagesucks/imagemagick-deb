@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.1-30 Q16-HDRI x86_64 babe7ad2f:20240407 https://imagemagick.org
+Version: ImageMagick 7.1.1-31 Q16-HDRI x86_64 46db807b1:20240421 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -336,8 +336,8 @@ THUMBNAIL* THUMBNAIL -w+   EXIF Profile Thumbnail
        XV* VIFF      rw+   Khoros Visualization image
       XWD* XWD       rw-   X Windows system window dump (color)
      YAML  YAML      -w+   The image format and characteristics
-    YCbCr* YCbCr     rw+   Raw Y, Cb, and Cr samples
-   YCbCrA* YCbCr     rw+   Raw Y, Cb, Cr, and alpha samples
+    YCBCR* YCBCR     rw+   Raw Y, Cb, and Cr samples
+   YCBCRA* YCBCR     rw+   Raw Y, Cb, Cr, and alpha samples
       YUV* YUV       rw-   CCIR 601 4:1:1 or 4:2:2
 
 * native blob support
