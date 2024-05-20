@@ -68,7 +68,7 @@ jobs:
           bash ./upload.sh binaries/*
 
       - uses: actions/checkout@v4.1.5
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && matrix.ubuntu == 'noble'
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           persist-credentials: false
@@ -96,7 +96,7 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Update README [skip ci]" && echo "push_readme=true" >> $GITHUB_ENV
 
       - name: Push README update to Pull Request
-        if: env.push_readme
+        if: env.push_readme && matrix.ubuntu == 'noble'
         uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
