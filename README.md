@@ -1,7 +1,7 @@
 # imagemagick-deb
 [![Build](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/build.yml/badge.svg)](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/build.yml) [![Update ImageMagick](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-imagemagick.yml/badge.svg)](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-imagemagick.yml) [![Update libde265](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-libde265.yml/badge.svg)](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-libde265.yml) [![Update libheif](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-libheif.yml/badge.svg)](https://github.com/vintagesucks/imagemagick-deb/actions/workflows/update-libheif.yml) [![Dependabot](https://badgen.net/badge/Dependabot/enabled/green?icon=dependabot)](https://dependabot.com/)
 
-[ImageMagick](https://imagemagick.org/) packaging for Ubuntu 22.04 (amd64) built with [CheckInstall](https://asic-linux.com.mx/~izto/checkinstall/).
+[ImageMagick](https://imagemagick.org/) packaging for Ubuntu 22.04/24.04 (amd64) built with [CheckInstall](https://asic-linux.com.mx/~izto/checkinstall/).
 
 #### Goals
 * [x] Functionality on par with the [ImageMagick Homebrew Formula](https://github.com/Homebrew/homebrew-core/blob/master/Formula/i/imagemagick.rb)
@@ -13,13 +13,13 @@
 #### Building
 Linux and Mac
 ```sh
-DOCKER_BUILDKIT=1 docker build --tag imagemagick-deb --output binaries .
+DOCKER_BUILDKIT=1 docker build --build-arg UBUNTU_VERSION=noble --output binaries .
 ```
 
 Windows
 ```ps1
 $env:DOCKER_BUILDKIT = 1
-docker build --tag imagemagick-deb --output binaries .
+docker build --build-arg UBUNTU_VERSION=noble --output binaries .
 ```
 
 The packages can be found in the `./binaries` folder after the build.

@@ -14,13 +14,27 @@ permissions: write-all
 
 jobs:
   build:
-    name: "Build"
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: 
+        - ubuntu-22.04
+        - ubuntu-24.04
+
+        include:
+          - os: ubuntu-22.04
+            ubuntu: jammy
+          - os: ubuntu-24.04
+            ubuntu: noble
+
+    name: ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
+
     steps:
       - uses: actions/checkout@v4.1.5
 
       - name: Build packages
-        run: DOCKER_BUILDKIT=1 docker build --tag imagemagick-deb --output binaries .
+        run: DOCKER_BUILDKIT=1 docker build --build-arg UBUNTU_VERSION=${{ matrix.ubuntu }} --output binaries .
 
       - name: List packages
         run: ls -lah binaries
@@ -61,7 +75,7 @@ jobs:
           fetch-depth: 0
 
       - name: Update README
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && ${{ matrix.ubuntu }} == 'noble'
         run: |
           sed -i '/#### Example Output/q' ./README.md
           echo '```sh' >> README.md
@@ -73,7 +87,7 @@ jobs:
           echo '```' >> README.md
 
       - name: Commit README update
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && ${{ matrix.ubuntu }} == 'noble'
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
