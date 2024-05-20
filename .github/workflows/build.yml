@@ -75,7 +75,7 @@ jobs:
           fetch-depth: 0
 
       - name: Update README
-        if: github.event_name == 'pull_request' && matrix.ubuntu == 'noble'
+        if: ${{ github.event_name == 'pull_request' && matrix.ubuntu == 'noble' }}
         run: |
           sed -i '/#### Example Output/q' ./README.md
           echo '```sh' >> README.md
@@ -87,7 +87,7 @@ jobs:
           echo '```' >> README.md
 
       - name: Commit README update
-        if: github.event_name == 'pull_request' && matrix.ubuntu == 'noble'
+        if: ${{ github.event_name == 'pull_request' && matrix.ubuntu == 'noble' }}
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
