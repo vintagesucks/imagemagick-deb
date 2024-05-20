@@ -29,7 +29,7 @@ RUN apt satisfy -y "$LIBHEIF_DEPENDENCIES"
 
 # Install ImageMagick dependencies
 ENV IMAGEMAGICK_DEPENDENCIES='\
-  gsfonts,\
+  fonts-urw-base35,\
   libbz2-dev,\
   libfontconfig1-dev (>= 2.1.0),\
   libfreetype-dev (>= 2.8.0),\
@@ -193,7 +193,7 @@ RUN [[ $(magick -list format) =~ "DNG  DNG       r--" ]]
 RUN [[ $(magick -list format) =~ "AVIF  HEIC      rw+" ]]
 
 # Check font support
-RUN [[ $(magick -list font) =~ "Helvetica" ]]
+RUN [[ $(magick -list font) =~ "Nimbus Sans" ]]
 
 # Upgrade imagick php extension
 RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl upgrade --force ./imagick.tgz
