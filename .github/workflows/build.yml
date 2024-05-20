@@ -60,12 +60,13 @@ jobs:
 
       - name: Upload binaries to GitHub Release
         if: contains(github.ref, 'tags')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -e
-          wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-          bash ./upload.sh binaries/*
+        uses: svenstaro/upload-release-action@2.9.0
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: binaries/*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
 
       - uses: actions/checkout@v4.1.5
         if: github.event_name == 'pull_request' && matrix.ubuntu == 'noble'
