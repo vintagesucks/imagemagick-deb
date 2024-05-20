@@ -58,6 +58,11 @@ jobs:
           name: binaries-${{ matrix.ubuntu }}
           path: binaries
 
+      - uses: actions/attest-build-provenance@v1.1.2
+        # if: contains(github.ref, 'tags')
+        with:
+          subject-path: 'binaries/*'
+
       - name: Upload binaries to GitHub Release
         if: contains(github.ref, 'tags')
         uses: svenstaro/upload-release-action@2.9.0
