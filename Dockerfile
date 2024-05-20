@@ -1,5 +1,6 @@
 # Build Packages
-FROM --platform=linux/amd64 ubuntu:jammy as builder
+ARG UBUNTU_VERSION
+FROM --platform=linux/amd64 ubuntu:${UBUNTU_VERSION} as builder
 SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -28,7 +29,7 @@ RUN apt satisfy -y "$LIBHEIF_DEPENDENCIES"
 
 # Install ImageMagick dependencies
 ENV IMAGEMAGICK_DEPENDENCIES='\
-  gsfonts,\
+  fonts-urw-base35,\
   libbz2-dev,\
   libfontconfig1-dev (>= 2.1.0),\
   libfreetype-dev (>= 2.8.0),\
@@ -58,7 +59,9 @@ WORKDIR libde265
 RUN ./autogen.sh
 RUN ./configure
 RUN make -j$(nproc)
-RUN checkinstall --pkgversion="$LIBDE265_VERSION"
+RUN checkinstall \
+  --pkgversion="$LIBDE265_VERSION" \
+  --fstrans=no
 RUN mv libde265_*.deb ../binaries/
 RUN pkg-config --exists --print-errors "libde265 = $LIBDE265_VERSION"
 WORKDIR /
@@ -73,7 +76,8 @@ RUN make -j$(nproc)
 RUN checkinstall \
   --pkgname="libheif" \
   --pkgversion="$LIBHEIF_VERSION" \
-  --requires="'$LIBHEIF_DEPENDENCIES, libde265 (>= $LIBDE265_VERSION)'"
+  --requires="'$LIBHEIF_DEPENDENCIES, libde265 (>= $LIBDE265_VERSION)'" \
+  --fstrans=no
 RUN mv libheif_*.deb ../../binaries/
 RUN pkg-config --exists --print-errors "libheif = $LIBHEIF_VERSION"
 WORKDIR /
@@ -113,7 +117,8 @@ RUN make -j$(nproc)
 RUN checkinstall \
   --pkgversion=$IMAGEMAGICK_EPOCH$(echo "$IMAGEMAGICK_VERSION" | cut -d- -f1) \
   --pkgrelease=$(echo "$IMAGEMAGICK_VERSION" | cut -d- -f2) \
-  --requires="'$IMAGEMAGICK_DEPENDENCIES, libde265 (>= $LIBDE265_VERSION), libheif (>= $LIBHEIF_VERSION)'"
+  --requires="'$IMAGEMAGICK_DEPENDENCIES, libde265 (>= $LIBDE265_VERSION), libheif (>= $LIBHEIF_VERSION)'" \
+  --fstrans=no
 RUN ldconfig
 RUN mv imagemagick_*.deb ../binaries/
 RUN [[ $(dpkg-query -W -f='${Version}' imagemagick) == $IMAGEMAGICK_EPOCH$IMAGEMAGICK_VERSION ]]
@@ -126,7 +131,7 @@ RUN CODENAME=$( . /etc/os-release ; echo $UBUNTU_CODENAME) && \
 WORKDIR /
 
 # Test package install
-FROM --platform=linux/amd64 ubuntu:jammy as tester
+FROM --platform=linux/amd64 ubuntu:${UBUNTU_VERSION} as tester
 COPY --from=builder binaries binaries
 SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
@@ -188,7 +193,7 @@ RUN [[ $(magick -list format) =~ "DNG  DNG       r--" ]]
 RUN [[ $(magick -list format) =~ "AVIF  HEIC      rw+" ]]
 
 # Check font support
-RUN [[ $(magick -list font) =~ "Helvetica" ]]
+RUN [[ $(magick -list font) =~ "Nimbus Sans" ]]
 
 # Upgrade imagick php extension
 RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl upgrade --force ./imagick.tgz

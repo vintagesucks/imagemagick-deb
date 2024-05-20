@@ -14,13 +14,27 @@ permissions: write-all
 
 jobs:
   build:
-    name: "Build"
-    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        os: 
+        - ubuntu-22.04
+        - ubuntu-24.04
+
+        include:
+          - os: ubuntu-22.04
+            ubuntu: jammy
+          - os: ubuntu-24.04
+            ubuntu: noble
+
+    name: ${{ matrix.os }}
+
+    runs-on: ${{ matrix.os }}
+
     steps:
-      - uses: actions/checkout@v4.1.5
+      - uses: actions/checkout@v4.1.6
 
       - name: Build packages
-        run: DOCKER_BUILDKIT=1 docker build --tag imagemagick-deb --output binaries .
+        run: DOCKER_BUILDKIT=1 docker build --build-arg UBUNTU_VERSION=${{ matrix.ubuntu }} --output binaries .
 
       - name: List packages
         run: ls -lah binaries
@@ -38,30 +52,37 @@ jobs:
       - name: magick -list format
         run: magick -list format
 
-      - name: Archive binary artifacts
-        uses: actions/upload-artifact@v4
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v1.1.2
+        if: contains(github.ref, 'tags')
         with:
-          name: binaries
+          subject-path: 'binaries/*'
+
+      - name: Archive binary artifacts
+        uses: actions/upload-artifact@v4.3.3
+        with:
+          name: binaries-${{ matrix.ubuntu }}
           path: binaries
 
       - name: Upload binaries to GitHub Release
         if: contains(github.ref, 'tags')
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -e
-          wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-          bash ./upload.sh binaries/*
+        uses: svenstaro/upload-release-action@2.9.0
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: binaries/*
+          tag: ${{ github.ref }}
+          overwrite: true
+          file_glob: true
 
-      - uses: actions/checkout@v4.1.5
-        if: github.event_name == 'pull_request'
+      - uses: actions/checkout@v4.1.6
+        if: github.event_name == 'pull_request' && matrix.ubuntu == 'noble'
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           persist-credentials: false
           fetch-depth: 0
 
       - name: Update README
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && matrix.ubuntu == 'noble'
         run: |
           sed -i '/#### Example Output/q' ./README.md
           echo '```sh' >> README.md
@@ -73,7 +94,7 @@ jobs:
           echo '```' >> README.md
 
       - name: Commit README update
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && matrix.ubuntu == 'noble'
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -82,7 +103,7 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Update README [skip ci]" && echo "push_readme=true" >> $GITHUB_ENV
 
       - name: Push README update to Pull Request
-        if: env.push_readme
+        if: env.push_readme && matrix.ubuntu == 'noble'
         uses: ad-m/github-push-action@v0.8.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
