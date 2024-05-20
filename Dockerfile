@@ -188,12 +188,12 @@ RUN [[ ! $(magick -version) =~ "(Beta)" ]]
 RUN for feature in Modules freetype heic jpeg png raw tiff ; do [[ $(magick -version) =~ $feature ]] ; done 
 
 # Check image format support
-# RUN [[ $(magick -list format) =~ "ARW  DNG       r--" ]]
-# RUN [[ $(magick -list format) =~ "DNG  DNG       r--" ]]
+RUN [[ $(magick -list format) =~ "ARW  DNG       r--" ]]
+RUN [[ $(magick -list format) =~ "DNG  DNG       r--" ]]
 RUN [[ $(magick -list format) =~ "AVIF  HEIC      rw+" ]]
 
 # Check font support
-# RUN [[ $(magick -list font) =~ "Helvetica" ]]
+RUN [[ $(magick -list font) =~ "Helvetica" ]]
 
 # Upgrade imagick php extension
 RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl upgrade --force ./imagick.tgz
