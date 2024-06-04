@@ -53,7 +53,7 @@ jobs:
         run: magick -list format
 
       - name: Attest build provenance
-        uses: actions/attest-build-provenance@v1.1.2
+        uses: actions/attest-build-provenance@v1.2.0
         if: contains(github.ref, 'tags')
         with:
           subject-path: 'binaries/*'
