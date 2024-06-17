@@ -31,7 +31,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v4.1.6
+      - uses: actions/checkout@v4
 
       - name: Build packages
         run: DOCKER_BUILDKIT=1 docker build --build-arg UBUNTU_VERSION=${{ matrix.ubuntu }} --output binaries .
@@ -53,13 +53,13 @@ jobs:
         run: magick -list format
 
       - name: Attest build provenance
-        uses: actions/attest-build-provenance@v1.2.0
+        uses: actions/attest-build-provenance@v1
         if: contains(github.ref, 'tags')
         with:
           subject-path: 'binaries/*'
 
       - name: Archive binary artifacts
-        uses: actions/upload-artifact@v4.3.3
+        uses: actions/upload-artifact@v4
         with:
           name: binaries-${{ matrix.ubuntu }}
           path: binaries
@@ -74,7 +74,7 @@ jobs:
           overwrite: true
           file_glob: true
 
-      - uses: actions/checkout@v4.1.6
+      - uses: actions/checkout@v4
         if: github.event_name == 'pull_request' && matrix.ubuntu == 'noble'
         with:
           ref: ${{ github.event.pull_request.head.ref }}
