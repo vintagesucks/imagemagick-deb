@@ -67,7 +67,7 @@ RUN pkg-config --exists --print-errors "libde265 = $LIBDE265_VERSION"
 WORKDIR /
 
 # Build libheif from source
-ENV LIBHEIF_VERSION="1.19.3"
+ENV LIBHEIF_VERSION="1.19.5"
 RUN git clone --depth 1 --branch v$LIBHEIF_VERSION https://github.com/strukturag/libheif.git
 WORKDIR libheif
 WORKDIR build
