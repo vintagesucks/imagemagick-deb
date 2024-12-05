@@ -20,13 +20,11 @@ jobs:
       - run: "sed -i 's/IMAGEMAGICK_VERSION=\".*\"$/IMAGEMAGICK_VERSION=\"${{steps.version.outputs.prop}}\"/g' Dockerfile"
       - run: rm version.json
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6.1.0
+        uses: peter-evans/create-pull-request@v7.0.5
         with:
-            author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
-            committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
+            sign-commits: true
             branch: 'github_actions/bump-imagemagick-${{steps.version.outputs.prop}}'
             title: 'Bump ImageMagick to ${{steps.version.outputs.prop}}'
             commit-message: 'Bump ImageMagick to ${{steps.version.outputs.prop}}'
             body: 'https://github.com/ImageMagick/ImageMagick/releases/tag/${{steps.version.outputs.prop}}'
             delete-branch: true
-            token: ${{ secrets.PAT }}
