@@ -38,12 +38,12 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.1-41 Q16-HDRI x86_64 d7d490223:20241115 https://imagemagick.org
+Version: ImageMagick 7.1.1-43 Q16-HDRI x86_64 afd817ca6:20241222 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
 Delegates (built-in): bzlib fontconfig freetype gslib heic jbig jng jp2 jpeg lcms lqr ltdl lzma openexr png ps raw tiff webp x xml zlib zstd
-Compiler: gcc (13.2)
+Compiler: gcc (13.3)
 
 $ magick -list format
    Format  Module    Mode  Description
@@ -57,6 +57,7 @@ $ magick -list format
       ART* ART       rw-   PFS: 1st Publisher Clip Art
       ARW  DNG       r--   Sony Alpha Raw Format (0.21.2-Release)
    ASHLAR* ASHLAR    -w+   Image sequence laid out in continuous irregular courses
+     AVCI  HEIC      ---   AVC Image File Format (1.19.5)
       AVI  VIDEO     r--   Microsoft Audio/Visual Interleaved
      AVIF  HEIC      rw+   AV1 Image File Format (1.19.5)
       AVS* AVS       rw+   AVS X image
@@ -133,7 +134,7 @@ $ magick -list format
      FL32* FL32      rw-   FilmLight
       FLV  VIDEO     rw+   Flash Video Stream
   FRACTAL* PLASMA    r--   Plasma fractal image
-      FTP* URL       r--   Uniform Resource Locator (ftp://)
+      FTP* URL       ---   Uniform Resource Locator (ftp://)
       FTS* FITS      rw+   Flexible Image Transport System
      FTXT* FTXT      rw-   Formatted text image
        G3* FAX       rw-   Group 3 FAX
@@ -154,7 +155,7 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       HRZ* HRZ       rw-   Slow Scan TeleVision
       HTM* HTML      -w-   Hypertext Markup Language and a client-side image map
      HTML* HTML      -w-   Hypertext Markup Language and a client-side image map
-     HTTP* URL       r--   Uniform Resource Locator (http://)
+     HTTP* URL       ---   Uniform Resource Locator (http://)
     HTTPS* URL       r--   Uniform Resource Locator (https://)
       ICB* TGA       rw-   Truevision Targa image
       ICO* ICON      rw+   Microsoft icon
