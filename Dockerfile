@@ -143,15 +143,15 @@ RUN apt update && apt install -y \
   imagemagick \
   libmagickwand-dev \
   php-pear \
-  php8.2 \
-  php8.2-cli \
-  php8.2-common \
-  php8.2-dev \
-  php8.2-xml
-RUN [[ $(php -v) =~ "PHP 8.2" ]]
+  php8.4 \
+  php8.4-cli \
+  php8.4-common \
+  php8.4-dev \
+  php8.4-xml
+RUN [[ $(php -v) =~ "PHP 8.4" ]]
 RUN curl -o imagick.tgz https://pecl.php.net/get/imagick
 RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl install ./imagick.tgz
-RUN echo extension=imagick.so > /etc/php/8.2/mods-available/imagick.ini
+RUN echo extension=imagick.so > /etc/php/8.4/mods-available/imagick.ini
 RUN phpenmod imagick
 
 # Installed ImageMagick version should not match built ImageMagick version
