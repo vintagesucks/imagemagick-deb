@@ -57,9 +57,9 @@ $ magick -list format
       ART* ART       rw-   PFS: 1st Publisher Clip Art
       ARW  DNG       r--   Sony Alpha Raw Format (0.21.2-Release)
    ASHLAR* ASHLAR    -w+   Image sequence laid out in continuous irregular courses
-     AVCI  HEIC      ---   AVC Image File Format (1.19.7)
+     AVCI  HEIC      ---   AVC Image File Format (1.19.8)
       AVI  VIDEO     r--   Microsoft Audio/Visual Interleaved
-     AVIF  HEIC      rw+   AV1 Image File Format (1.19.7)
+     AVIF  HEIC      rw+   AV1 Image File Format (1.19.8)
       AVS* AVS       rw+   AVS X image
     BAYER* BAYER     rw+   Raw mosaiced samples
    BAYERA* BAYER     rw+   Raw mosaiced and alpha samples
@@ -149,8 +149,8 @@ $ magick -list format
        GV  DOT       ---   Graphviz
      HALD* HALD      r--   Identity Hald color lookup table image
       HDR* HDR       rw+   Radiance RGBE image format
-     HEIC  HEIC      rw+   High Efficiency Image Format (1.19.7)
-     HEIF  HEIC      rw+   High Efficiency Image Format (1.19.7)
+     HEIC  HEIC      rw+   High Efficiency Image Format (1.19.8)
+     HEIF  HEIC      rw+   High Efficiency Image Format (1.19.8)
 HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       HRZ* HRZ       rw-   Slow Scan TeleVision
       HTM* HTML      -w-   Hypertext Markup Language and a client-side image map
