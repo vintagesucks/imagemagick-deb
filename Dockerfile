@@ -196,7 +196,9 @@ RUN [[ $(magick -list format) =~ "AVIF  HEIC      rw+" ]]
 RUN [[ $(magick -list font) =~ "Nimbus Sans" ]]
 
 # Upgrade imagick php extension
+RUN phpdismod imagick
 RUN printf "\n" | MAKEFLAGS="-j $(nproc)" pecl upgrade --force ./imagick.tgz
+RUN phpenmod imagick
 
 # ImageMagick version imagick was compiled with and is using should match built ImageMagick version
 RUN [[ $(php -i | grep "Imagick compiled with ImageMagick version") =~ $(dpkg-deb -f ./binaries/imagemagick_*.deb Version | cut -d: -f2) ]]
