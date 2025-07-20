@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.1-47 Q16-HDRI x86_64 c8f4e8cb7:20250329 https://imagemagick.org
+Version: ImageMagick 7.1.2-0 Q16-HDRI x86_64 9bde76f1d:20250712 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -158,6 +158,7 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
      HTTP* URL       r--   Uniform Resource Locator (http://)
     HTTPS* URL       r--   Uniform Resource Locator (https://)
       ICB* TGA       rw-   Truevision Targa image
+      ICN* ICON      rw-   Microsoft icon
       ICO* ICON      rw+   Microsoft icon
      ICON* ICON      rw-   Microsoft icon
       IIQ  DNG       r--   Phase One Raw Format (0.21.2-Release)
