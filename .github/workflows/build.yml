@@ -31,7 +31,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Build packages
         run: DOCKER_BUILDKIT=1 docker build --build-arg UBUNTU_VERSION=${{ matrix.ubuntu }} --output binaries .
@@ -74,7 +74,7 @@ jobs:
           overwrite: true
           file_glob: true
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         if: github.event_name == 'pull_request' && matrix.ubuntu == 'noble'
         with:
           ref: ${{ github.event.pull_request.head.ref }}
