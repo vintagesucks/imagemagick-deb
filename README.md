@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.2-0 Q16-HDRI x86_64 9bde76f1d:20250712 https://imagemagick.org
+Version: ImageMagick 7.1.2-1 Q16-HDRI x86_64 e08c2fb4f:20250811 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/script/license.php
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -285,6 +285,8 @@ RADIAL-GRADIENT* GRADIENT  r--   Gradual radial passing from one shade to anothe
       RWL  DNG       r--   Leica Raw Format (0.21.2-Release)
       SCR* SCR       r--   ZX-Spectrum SCREEN$
       SCT* SCT       r--   Scitex HandShake
+      SF3* SF3       rw+   Simple File Format Family Images
+             See https://shirakumo.org/docs/sf3/ for information on the SF3 file formats.
       SFW* SFW       r--   Seattle Film Works
       SGI* SGI       rw+   Irix RGB image
     SHTML* HTML      -w-   Hypertext Markup Language and a client-side image map
