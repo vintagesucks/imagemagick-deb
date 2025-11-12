@@ -59,7 +59,7 @@ jobs:
           subject-path: 'binaries/*'
 
       - name: Archive binary artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: binaries-${{ matrix.ubuntu }}
           path: binaries
