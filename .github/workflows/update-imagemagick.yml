@@ -9,18 +9,18 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       - run: wget -O version.json "https://api.github.com/repos/ImageMagick/ImageMagick/releases/latest"
       - name: Get latest version
         id: version
-        uses: notiz-dev/github-action-json-property@v0.2.0
+        uses: notiz-dev/github-action-json-property@a5a9c668b16513c737c3e1f8956772c99c73f6e8 # v0.2.0
         with: 
             path: 'version.json'
             prop_path: 'tag_name'
       - run: "sed -i 's/IMAGEMAGICK_VERSION=\".*\"$/IMAGEMAGICK_VERSION=\"${{steps.version.outputs.prop}}\"/g' Dockerfile"
       - run: rm version.json
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7.0.9
+        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
         with:
             author: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
             committer: 'github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>'
