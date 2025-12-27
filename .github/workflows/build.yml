@@ -31,7 +31,7 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
       - name: Build packages
         run: DOCKER_BUILDKIT=1 docker build --build-arg UBUNTU_VERSION=${{ matrix.ubuntu }} --output binaries .
@@ -53,20 +53,20 @@ jobs:
         run: magick -list format
 
       - name: Attest build provenance
-        uses: actions/attest-build-provenance@v3
+        uses: actions/attest-build-provenance@977bb373ede98d70efdf65b84cb5f73e068dcc2a # v3.0.0
         if: contains(github.ref, 'tags')
         with:
           subject-path: 'binaries/*'
 
       - name: Archive binary artifacts
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5.0.0
         with:
           name: binaries-${{ matrix.ubuntu }}
           path: binaries
 
       - name: Upload binaries to GitHub Release
         if: contains(github.ref, 'tags')
-        uses: svenstaro/upload-release-action@2.11.3
+        uses: svenstaro/upload-release-action@6b7fa9f267e90b50a19fef07b3596790bb941741 # 2.11.3
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: binaries/*
@@ -74,7 +74,7 @@ jobs:
           overwrite: true
           file_glob: true
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         if: github.event_name == 'pull_request' && matrix.ubuntu == 'noble'
         with:
           ref: ${{ github.event.pull_request.head.ref }}
@@ -104,7 +104,7 @@ jobs:
 
       - name: Push README update to Pull Request
         if: env.push_readme && matrix.ubuntu == 'noble'
-        uses: ad-m/github-push-action@v1.0.0
+        uses: ad-m/github-push-action@77c5b412c50b723d2a4fbc6d71fb5723bcd439aa # v1.0.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.head_ref }}
