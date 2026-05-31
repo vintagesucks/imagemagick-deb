@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.2-15 Q16-HDRI x86_64 818ee6363:20260222 https://imagemagick.org
+Version: ImageMagick 7.1.2-24 Q16-HDRI x86_64 3c45ab0bf:20260525 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/license/
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -211,7 +211,7 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       MPG  VIDEO     rw+   MPEG Video Stream
       MPO* JPEG      r--   Joint Photographic Experts Group JFIF format (libjpeg-turbo 2.1.5)
       MRW  DNG       r--   Sony (Minolta) Raw Format (0.21.2-Release)
-      MSL* MSL       rw+   Magick Scripting Language
+      MSL  MSL       r--   Magick Scripting Language
      MSVG* SVG       rw+   ImageMagick's own SVG internal renderer
       MTV* MTV       rw+   MTV Raytracing image format
       MVG* MVG       rw-   Magick Vector Graphics
@@ -300,7 +300,7 @@ SPARSE-COLOR* TXT       -w+   Sparse Color
       STI  DNG       r--   Sinar CaptureShop Raw Format (0.21.2-Release)
    STRIMG* STRIMG    rw-   String to image and back
       SUN* SUN       rw+   SUN Rasterfile
-      SVG* SVG       rw+   Scalable Vector Graphics (XML 2.9.14)
+      SVG  SVG       rw+   Scalable Vector Graphics (XML 2.9.14)
      SVGZ* SVG       rw+   Compressed Scalable Vector Graphics (XML 2.9.14)
      TEXT* TXT       r--   Text
       TGA* TGA       rw-   Truevision Targa image
