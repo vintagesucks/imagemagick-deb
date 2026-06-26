@@ -55,7 +55,7 @@ ENV LIBDE265_VERSION="1.1.1"
 RUN git clone --depth 1 --branch v$LIBDE265_VERSION https://github.com/strukturag/libde265.git
 WORKDIR libde265
 WORKDIR build
-RUN cmake --preset=release ..
+RUN cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_ENCODER=OFF ..
 RUN make -j$(nproc)
 RUN checkinstall \
   --pkgname="libde265" \
