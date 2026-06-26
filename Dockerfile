@@ -9,16 +9,14 @@ RUN mkdir binaries
 
 # Install build dependencies
 RUN apt update && apt -y install \
-  autoconf \
   build-essential \
   checkinstall \
   cmake \
   curl \
   git \
-  libtool \
+  libltdl-dev \
   pkg-config \
-  software-properties-common \
-  wget
+  software-properties-common
 
 # Install libheif dependencies
 ENV LIBHEIF_DEPENDENCIES='\
@@ -56,13 +54,14 @@ RUN apt satisfy -y "$IMAGEMAGICK_DEPENDENCIES"
 ENV LIBDE265_VERSION="1.1.1"
 RUN git clone --depth 1 --branch v$LIBDE265_VERSION https://github.com/strukturag/libde265.git
 WORKDIR libde265
-RUN ./autogen.sh
-RUN ./configure
+WORKDIR build
+RUN cmake --preset=release ..
 RUN make -j$(nproc)
 RUN checkinstall \
+  --pkgname="libde265" \
   --pkgversion="$LIBDE265_VERSION" \
   --fstrans=no
-RUN mv libde265_*.deb ../binaries/
+RUN mv libde265_*.deb ../../binaries/
 RUN pkg-config --exists --print-errors "libde265 = $LIBDE265_VERSION"
 WORKDIR /
 
