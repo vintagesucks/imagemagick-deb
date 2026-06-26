@@ -1,6 +1,6 @@
 # Build Packages
 ARG UBUNTU_VERSION
-FROM --platform=linux/amd64 ubuntu:${UBUNTU_VERSION} as builder
+FROM --platform=linux/amd64 ubuntu:${UBUNTU_VERSION} AS builder
 SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -130,7 +130,7 @@ RUN CODENAME=$( . /etc/os-release ; echo $UBUNTU_CODENAME) && \
 WORKDIR /
 
 # Test package install
-FROM --platform=linux/amd64 ubuntu:${UBUNTU_VERSION} as tester
+FROM --platform=linux/amd64 ubuntu:${UBUNTU_VERSION} AS tester
 COPY --from=builder binaries binaries
 SHELL ["/bin/bash", "-c"]
 ENV DEBIAN_FRONTEND=noninteractive
