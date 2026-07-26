@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.2-26 Q16-HDRI x86_64 702175ac4:20260621 https://imagemagick.org
+Version: ImageMagick 7.1.2-27 Q16-HDRI x86_64 e4c2b403b:20260705 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/license/
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
