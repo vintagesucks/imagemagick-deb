@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.2-29 Q16-HDRI x86_64 b919b37fd:20260727 https://imagemagick.org
+Version: ImageMagick 7.1.2-30 Q16-HDRI x86_64 7d45ed032:20260823 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/license/
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -56,6 +56,8 @@ $ magick -list format
      APNG  VIDEO     rw+   Animated Portable Network Graphics
       ART* ART       rw-   PFS: 1st Publisher Clip Art
       ARW  DNG       r--   Sony Alpha Raw Format (0.21.2-Release)
+      ASE* ASE       rw+   Aseprite Sprite Format
+ ASEPRITE* ASE       rw+   Aseprite Sprite Format
    ASHLAR* ASHLAR    -w+   Image sequence laid out in continuous irregular courses
      AVCI  HEIC      ---   AVC Image File Format (1.23.2)
       AVI  VIDEO     r--   Microsoft Audio/Visual Interleaved
@@ -325,6 +327,7 @@ THUMBNAIL* THUMBNAIL -w+   EXIF Profile Thumbnail
      VIFF* VIFF      rw+   Khoros Visualization image
      VIPS* VIPS      rw+   VIPS image
       VST* TGA       rw-   Truevision Targa image
+   WBINFO* WBINFO    r--   Amiga Workbench Icon
      WBMP* WBMP      rw-   Wireless Bitmap (level 0) image
      WEBM  VIDEO     rw+   Open Web Media
      WEBP* WEBP      rw+   WebP Image Format (libwebp 1.3.2 [020F])
