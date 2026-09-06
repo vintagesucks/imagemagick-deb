@@ -59,9 +59,9 @@ $ magick -list format
       ASE* ASE       rw+   Aseprite Sprite Format
  ASEPRITE* ASE       rw+   Aseprite Sprite Format
    ASHLAR* ASHLAR    -w+   Image sequence laid out in continuous irregular courses
-     AVCI  HEIC      ---   AVC Image File Format (1.23.3)
+     AVCI  HEIC      ---   AVC Image File Format (1.23.4)
       AVI  VIDEO     r--   Microsoft Audio/Visual Interleaved
-     AVIF  HEIC      rw+   AV1 Image File Format (1.23.3)
+     AVIF  HEIC      rw+   AV1 Image File Format (1.23.4)
       AVS* AVS       rw+   AVS X image
     BAYER* BAYER     rw+   Raw mosaiced samples
    BAYERA* BAYER     rw+   Raw mosaiced and alpha samples
@@ -152,8 +152,8 @@ $ magick -list format
        GV  DOT       ---   Graphviz
      HALD* HALD      r--   Identity Hald color lookup table image
       HDR* HDR       rw+   Radiance RGBE image format
-     HEIC  HEIC      rw+   High Efficiency Image Format (1.23.3)
-     HEIF  HEIC      rw+   High Efficiency Image Format (1.23.3)
+     HEIC  HEIC      rw+   High Efficiency Image Format (1.23.4)
+     HEIF  HEIC      rw+   High Efficiency Image Format (1.23.4)
 HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       HRZ* HRZ       rw-   Slow Scan TeleVision
       HTM* HTML      -w-   Hypertext Markup Language and a client-side image map
