@@ -38,7 +38,7 @@ The packages will automatically resolve their own dependencies when installed wi
 #### Example Output
 ```sh
 $ magick --version
-Version: ImageMagick 7.1.2-34 Q16-HDRI x86_64 c5d4ca8a0:20261014 https://imagemagick.org
+Version: ImageMagick 7.1.2-35 Q16-HDRI x86_64 acaf7e418:20261031 https://imagemagick.org
 Copyright: (C) 1999 ImageMagick Studio LLC
 License: https://imagemagick.org/license/
 Features: Cipher DPC HDRI Modules OpenMP(4.5) 
@@ -63,8 +63,8 @@ $ magick -list format
       AVI  VIDEO     r--   Microsoft Audio/Visual Interleaved
      AVIF  HEIC      rw+   AV1 Image File Format (1.23.6)
       AVS* AVS       rw+   AVS X image
-    BAYER* BAYER     rw+   Raw mosaiced samples
-   BAYERA* BAYER     rw+   Raw mosaiced and alpha samples
+    BAYER  BAYER     rw+   Raw mosaiced samples
+   BAYERA  BAYER     rw+   Raw mosaiced and alpha samples
       BGR* BGR       rw+   Raw blue, green, and red samples
      BGRA* BGR       rw+   Raw blue, green, red, and alpha samples
      BGRO* BGR       rw+   Raw blue, green, red, and opacity samples
@@ -82,7 +82,7 @@ $ magick -list format
   CAPTION* CAPTION   r--   Caption
       CIN* CIN       rw-   Cineon Image File
       CIP* CIP       -w-   Cisco IP phone image format
-     CLIP* CLIP      rw+   Image Clip Mask
+     CLIP  CLIP      rw+   Image Clip Mask
      CMYK* CMYK      rw+   Raw cyan, magenta, yellow, and black samples
     CMYKA* CMYK      rw+   Raw cyan, magenta, yellow, black, and alpha samples
       CR2  DNG       r--   Canon Digital Camera Raw Format (0.21.2-Release)
@@ -154,10 +154,10 @@ $ magick -list format
       HDR* HDR       rw+   Radiance RGBE image format
      HEIC  HEIC      rw+   High Efficiency Image Format (1.23.6)
      HEIF  HEIC      rw+   High Efficiency Image Format (1.23.6)
-HISTOGRAM* HISTOGRAM -w-   Histogram of the image
+HISTOGRAM  HISTOGRAM -w-   Histogram of the image
       HRZ* HRZ       rw-   Slow Scan TeleVision
-      HTM* HTML      -w-   Hypertext Markup Language and a client-side image map
-     HTML* HTML      -w-   Hypertext Markup Language and a client-side image map
+      HTM  HTML      -w-   Hypertext Markup Language and a client-side image map
+     HTML  HTML      -w-   Hypertext Markup Language and a client-side image map
      HTTP* URL       r--   Uniform Resource Locator (http://)
     HTTPS* URL       r--   Uniform Resource Locator (https://)
       ICB* TGA       rw-   Truevision Targa image
@@ -195,9 +195,9 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       M4V  VIDEO     rw+   Raw VIDEO-4 Video
       MAC* MAC       r--   MAC Paint
       MAP* MAP       rw-   Colormap intensities and indices
-     MASK* MASK      rw+   Image Clip Mask
+     MASK  MASK      rw+   Image Clip Mask
       MAT  MAT       rw+   MATLAB level 5 image format
-    MATTE* MATTE     -w+   MATTE format
+    MATTE  MATTE     -w+   MATTE format
       MDC  DNG       r--   Minolta Digital Camera Raw Format (0.21.2-Release)
       MEF  DNG       r--   Mamiya Raw Format (0.21.2-Release)
      MIFF* MIFF      rw+   Magick Image File Format
@@ -220,7 +220,7 @@ HISTOGRAM* HISTOGRAM -w-   Histogram of the image
       MVG* MVG       rw-   Magick Vector Graphics
       NEF  DNG       r--   Nikon Digital SLR Camera Raw Format (0.21.2-Release)
       NRW  DNG       r--   Nikon Digital SLR Camera Raw Format (0.21.2-Release)
-     NULL* NULL      rw-   Constant image of uniform color
+     NULL  NULL      rw-   Constant image of uniform color
       ORA  ORA       ---   OpenRaster format
       ORF  DNG       r--   Olympus Digital Camera Raw Format (0.21.2-Release)
       OTB* OTB       rw-   On-the-air bitmap
@@ -292,7 +292,7 @@ RADIAL-GRADIENT* GRADIENT  r--   Gradual radial passing from one shade to anothe
              See https://shirakumo.org/docs/sf3/ for information on the SF3 file formats.
       SFW* SFW       r--   Seattle Film Works
       SGI* SGI       rw+   Irix RGB image
-    SHTML* HTML      -w-   Hypertext Markup Language and a client-side image map
+    SHTML  HTML      -w-   Hypertext Markup Language and a client-side image map
       SIX* SIXEL     rw-   DEC SIXEL Graphics Format
     SIXEL* SIXEL     rw-   DEC SIXEL Graphics Format
 SPARSE-COLOR* TXT       -w+   Sparse Color
@@ -307,7 +307,7 @@ SPARSE-COLOR* TXT       -w+   Sparse Color
      SVGZ* SVG       rw+   Compressed Scalable Vector Graphics (XML 2.9.14)
      TEXT* TXT       r--   Text
       TGA* TGA       rw-   Truevision Targa image
-THUMBNAIL* THUMBNAIL -w+   EXIF Profile Thumbnail
+THUMBNAIL  THUMBNAIL -w+   EXIF Profile Thumbnail
      TIFF* TIFF      rw+   Tagged Image File Format (LIBTIFF, Version 4.5.1)
              Compression options: None, Fax/Group3, Group4, JBIG, JPEG, LERC, LZW, LZMA, RLE, ZIP, ZSTD, WEBP
    TIFF64* TIFF      rw+   Tagged Image File Format (64-bit) (LIBTIFF, Version 4.5.1)
@@ -324,7 +324,7 @@ THUMBNAIL* THUMBNAIL -w+   EXIF Profile Thumbnail
      UYVY* UYVY      rw-   16bit/pixel interleaved YUV
       VDA* TGA       rw-   Truevision Targa image
     VICAR* VICAR     rw-   Video Image Communication And Retrieval
-      VID* VID       rw+   Visual Image Directory
+      VID  VID       rw+   Visual Image Directory
      VIFF* VIFF      rw+   Khoros Visualization image
      VIPS* VIPS      rw+   VIPS image
       VST* TGA       rw-   Truevision Targa image
